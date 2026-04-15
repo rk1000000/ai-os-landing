@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI OS — операционная система для компании</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --fd:'Archivo',system-ui,sans-serif;--fb:'Spectral',Georgia,serif;
+            --bg:oklch(0.985 0.004 50);--sf:oklch(0.965 0.006 50);--bd:oklch(0.895 0.006 50);
+            --tx:oklch(0.18 0.012 50);--m1:oklch(0.40 0.008 50);--m2:oklch(0.56 0.006 50);
+            --hi:oklch(0.94 0.018 255);--hib:oklch(0.84 0.035 255);
+            --mw:1080px
+        }
+        html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+        body{font-family:var(--fb);line-height:1.65;color:var(--tx);background:var(--bg)}
+        .c{max-width:var(--mw);margin:0 auto;padding:0 clamp(24px,5vw,48px)}
+        section{padding:clamp(48px,7vh,88px) 0}
+        .lbl{font-family:var(--fd);font-weight:300;font-size:.6875rem;text-transform:uppercase;letter-spacing:.12em;color:var(--m2);margin-bottom:18px}
+        .ttl{font-family:var(--fd);font-weight:600;font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
+        .lead{font-size:1.0625rem;line-height:1.7;color:var(--m1);max-width:520px;margin-bottom:clamp(28px,3.5vh,48px)}
+
+        /* Hero */
+        .hero{padding:clamp(64px,11vh,120px) 0 clamp(40px,6vh,72px);max-width:720px}
+        .hero h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.5rem,7vw,4.5rem);line-height:1.06;letter-spacing:-.035em;margin-bottom:20px}
+        .hero .sub{font-family:var(--fd);font-weight:400;font-size:clamp(1.0625rem,1.8vw,1.375rem);line-height:1.4;color:var(--m1);max-width:540px}
+
+        /* Superpower block */
+        .sp{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:620px;margin:24px 0 0}
+        .sp-item{padding:16px 20px;background:var(--sf);font-family:var(--fd)}
+        .sp-num{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;margin-bottom:2px}
+        .sp-label{font-size:.75rem;font-weight:400;color:var(--m1);line-height:1.4}
+        @media(max-width:480px){.sp{grid-template-columns:1fr}}
+
+        /* Stack */
+        .stack{display:flex;flex-direction:column;gap:3px;max-width:580px}
+        .sr{display:flex;align-items:baseline;gap:16px;padding:13px 20px;background:var(--sf);font-family:var(--fd);font-size:.875rem}
+        .sr-n{font-weight:300;color:var(--m2);min-width:22px}
+        .sr-name{font-weight:600;min-width:140px}
+        .sr-brief{font-weight:400;color:var(--m1);font-size:.8125rem}
+        @media(max-width:600px){.sr{flex-wrap:wrap;gap:4px 12px}.sr-brief{flex-basis:100%;padding-left:38px}}
+
+        /* Integrations */
+        .int-row{display:flex;flex-wrap:wrap;gap:4px;margin:20px 0}
+        .int-tag{font-family:var(--fd);font-size:.75rem;font-weight:500;padding:7px 14px;background:var(--sf);border:1px solid var(--bd)}
+        .int-tag.active{border-color:var(--hib);background:var(--hi)}
+
+        /* Edge block — AI > human */
+        .edge{display:grid;grid-template-columns:1fr 1fr;gap:0 3px;max-width:640px;margin:0 0 24px}
+        .edge-col{display:flex;flex-direction:column;gap:3px}
+        .edge-head{font-family:var(--fd);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;background:var(--sf);text-align:center}
+        .edge-cell{padding:12px 16px;background:var(--sf);font-family:var(--fd);font-size:.8125rem;line-height:1.5;color:var(--m1)}
+        .edge-col:last-child .edge-head{background:var(--hi)}
+        .edge-col:last-child .edge-cell{background:oklch(0.975 0.008 255)}
+        @media(max-width:540px){.edge{grid-template-columns:1fr}.edge-col:last-child{margin-top:12px}}
+
+        /* Flow diagrams */
+        .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 24px}
+        .fn{font-family:var(--fd);font-size:.8125rem;font-weight:500;padding:7px 13px;background:var(--sf);border:1px solid var(--bd)}
+        .fn.hi{background:var(--hi);border-color:var(--hib)}
+        .fn.ghost{border-style:dashed;color:var(--m2)}
+        .fa{font-family:var(--fd);font-size:.75rem;color:var(--m2)}
+
+        /* Council */
+        .council{max-width:440px;margin:18px 0 24px}
+        .council-agents{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:4px}
+        .council-agent{text-align:center;padding:10px 6px;background:var(--sf);border:1px solid var(--bd);font-family:var(--fd);font-size:.75rem;font-weight:500}
+        .council-agent small{font-weight:300;font-size:.625rem;display:block;margin-top:1px}
+        .council-down{text-align:center;padding:5px 0;color:var(--m2);font-family:var(--fd);font-size:.6875rem}
+        .council-result{padding:10px 16px;text-align:center;background:var(--hi);border:1px solid var(--hib);font-family:var(--fd);font-size:.8125rem;font-weight:500}
+
+        /* Loop */
+        .loop{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 24px;padding:12px 16px;background:var(--sf);border:1px solid var(--bd)}
+        .loop span{font-family:var(--fd);font-size:.8125rem}
+        .loop .la{color:var(--m2);font-size:.75rem}
+
+        /* Modules */
+        .mods{display:flex;flex-direction:column}
+        .mod{padding:clamp(28px,3.5vh,44px) 0;border-top:1px solid var(--bd)}
+        .mod:last-child{border-bottom:1px solid var(--bd)}
+        .mod-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
+        .mod-cat{font-family:var(--fd);font-weight:500;font-size:.6875rem;text-transform:uppercase;letter-spacing:.08em;color:var(--m2);min-width:120px}
+        .mod-title{font-family:var(--fd);font-weight:600;font-size:1.0625rem;letter-spacing:-.01em}
+        .mod-body{padding-left:136px;max-width:680px}
+        .mod-body p{font-size:.9375rem;line-height:1.7;color:var(--m1);margin-bottom:5px}
+        .mod-body p:last-child{margin-bottom:0}
+        .mod-body strong{color:var(--tx);font-weight:500}
+        @media(max-width:720px){.mod-head{flex-direction:column;gap:3px}.mod-body{padding-left:0}}
+
+        /* Flywheel */
+        .flywheel{display:flex;flex-direction:column;gap:3px;max-width:520px;margin:18px 0 24px}
+        .fw-step{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--sf);font-family:var(--fd);font-size:.8125rem}
+        .fw-num{font-weight:300;color:var(--m2);min-width:18px}
+        .fw-step:last-child{background:var(--hi);border:1px solid var(--hib)}
+
+        /* Vision */
+        .vis{max-width:560px;display:flex;flex-direction:column;gap:28px}
+        .vis-label{font-family:var(--fd);font-weight:600;font-size:1rem;margin-bottom:4px}
+        .vis-text{font-size:1rem;line-height:1.7;color:var(--m1);max-width:460px}
+        .vis-coda{font-style:italic;font-size:clamp(1.0625rem,1.5vw,1.3125rem);line-height:1.5;margin-top:8px;max-width:420px}
+
+        footer{padding:56px 0 32px}
+        footer p{font-family:var(--fd);font-weight:300;font-size:.75rem;color:var(--m2);letter-spacing:.04em}
+
+        .r{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out,transform .45s ease-out}
+        .r.v{opacity:1;transform:translateY(0)}
+        @media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}}
+    </style>
+</head>
+<body>
+<div class="c">
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1 class="r">AI как операционный<br>директор компании</h1>
+        <p class="sub r">Система, которая читает всё, помнит всё, видит паттерны в тысячах разговоров — и действует. Для компаний от 10 до 1000 человек.</p>
+
+        <div class="sp r">
+            <div class="sp-item"><div class="sp-num">10–100×</div><div class="sp-label">дешевле человека на информационных задачах</div></div>
+            <div class="sp-item"><div class="sp-num">∞</div><div class="sp-label">bandwidth: нет числа Данбара, нет span of control</div></div>
+            <div class="sp-item"><div class="sp-num">0</div><div class="sp-label">маржинальная стоимость масштабирования навыка</div></div>
+            <div class="sp-item"><div class="sp-num">24/7</div><div class="sp-label">мониторинг, без настроения, усталости, политики</div></div>
+        </div>
+    </section>
+
+    <!-- Почему AI, а не человек -->
+    <section>
+        <p class="lbl r">Преимущество</p>
+        <h2 class="ttl r">Что видит система, чего не видит человек</h2>
+
+        <div class="edge r">
+            <div class="edge-col">
+                <div class="edge-head">Человек</div>
+                <div class="edge-cell">Помнит последние 3 встречи</div>
+                <div class="edge-cell">Читает 10% документов</div>
+                <div class="edge-cell">Видит свой отдел</div>
+                <div class="edge-cell">Забывает решения через неделю</div>
+                <div class="edge-cell">Фильтрует через настроение</div>
+            </div>
+            <div class="edge-col">
+                <div class="edge-head">Система</div>
+                <div class="edge-cell">Помнит каждую встречу, каждое решение</div>
+                <div class="edge-cell">Читает всё. Ищет по смыслу, не по словам</div>
+                <div class="edge-cell">Видит связи между всеми отделами</div>
+                <div class="edge-cell">Проверяет противоречия с прошлыми решениями</div>
+                <div class="edge-cell">Анализирует данные. Без bias, без усталости</div>
+            </div>
+        </div>
+
+        <p class="lead r" style="margin-top:24px">
+            Context Engineering > Prompt Engineering. Важно не что вы говорите модели — а что модель <em>видит</em> при принятии решения. Prompt — одна инструкция. Context — данные, память, весь контекст компании.
+        </p>
+    </section>
+
+    <!-- Архитектура -->
+    <section>
+        <p class="lbl r">Архитектура</p>
+        <h2 class="ttl r">Шесть слоёв</h2>
+
+        <div class="stack r">
+            <div class="sr"><span class="sr-n">06</span><span class="sr-name">Управление</span><span class="sr-brief">FinOps, метрики, process ownership, ROI на процесс</span></div>
+            <div class="sr"><span class="sr-n">05</span><span class="sr-name">Люди</span><span class="sr-brief">AI Champions, новые роли, adoption, саботаж-менеджмент</span></div>
+            <div class="sr"><span class="sr-n">04</span><span class="sr-name">Скиллы</span><span class="sr-brief">shared, versioned, forkable. Evals: unit → integration → business</span></div>
+            <div class="sr"><span class="sr-n">03</span><span class="sr-name">Оркестрация</span><span class="sr-brief">ролевые агенты, пайплайны, генератор/дискриминатор</span></div>
+            <div class="sr"><span class="sr-n">02</span><span class="sr-name">Данные и память</span><span class="sr-brief">семантическая · эпизодическая · процедурная</span></div>
+            <div class="sr"><span class="sr-n">01</span><span class="sr-name">Инфраструктура</span><span class="sr-brief">guardrails, DLP, policy engine, audit, session traces</span></div>
+        </div>
+
+        <p class="lbl r" style="margin-top:clamp(32px,4vh,48px)">Данные и память</p>
+        <div class="edge r" style="max-width:680px">
+            <div class="edge-col">
+                <div class="edge-head">Тип памяти</div>
+                <div class="edge-cell"><strong style="color:var(--tx)">Семантическая</strong> — факты и связи. «Клиент X на тарифе Y»</div>
+                <div class="edge-cell"><strong style="color:var(--tx)">Эпизодическая</strong> — события. «2 марта клиент эскалировал тикет»</div>
+                <div class="edge-cell"><strong style="color:var(--tx)">Процедурная</strong> — навыки. Как подать квартальный отчёт, скрипты проверки</div>
+            </div>
+            <div class="edge-col">
+                <div class="edge-head">Хранилище</div>
+                <div class="edge-cell">Obsidian / Markdown + Git — единый источник истины</div>
+                <div class="edge-cell">SQL к существующим БД — агент пишет запросы</div>
+                <div class="edge-cell">MCP-коннекторы к SaaS: CRM, мессенджеры, календарь</div>
+            </div>
+        </div>
+
+        <p class="lbl r" style="margin-top:clamp(32px,4vh,48px)">Интеграции</p>
+        <div class="int-row r">
+            <span class="int-tag active">Obsidian / Markdown</span>
+            <span class="int-tag active">Git</span>
+            <span class="int-tag active">Telegram</span>
+            <span class="int-tag active">Google Calendar</span>
+            <span class="int-tag active">Whisper</span>
+            <span class="int-tag">CRM (Bitrix / amoCRM)</span>
+            <span class="int-tag active">MCP Protocol</span>
+            <span class="int-tag">SQL / ClickHouse</span>
+            <span class="int-tag active">Claude / Gemini / ChatGPT</span>
+            <span class="int-tag">n8n</span>
+            <span class="int-tag">Playwright</span>
+            <span class="int-tag">QMD</span>
+        </div>
+    </section>
+
+    <!-- Модули -->
+    <section>
+        <p class="lbl r">Модули</p>
+        <h2 class="ttl r">Что внутри</h2>
+        <p class="lead r">Каждый модуль — скилл с входом, процессом и результатом.</p>
+
+        <div class="mods">
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Ритм дня</span><span class="mod-title">Brief → Focus → EOD → Review</span></div>
+                <div class="mod-body">
+                    <div class="flow">
+                        <span class="fn">Brief</span><span class="fa">→</span>
+                        <span class="fn">Focus</span><span class="fa">→</span>
+                        <span class="fn ghost">день</span><span class="fa">→</span>
+                        <span class="fn">EOD</span><span class="fa">→</span>
+                        <span class="fn hi">Learnings</span><span class="fa">→</span>
+                        <span class="fn">Weekly Review</span>
+                    </div>
+                    <p><strong>Brief</strong> — утром: что за 24ч, что на сегодня, что просрочено. Привязан к стратегическим приоритетам.</p>
+                    <p><strong>Focus</strong> — план дня. Не цели — действия.</p>
+                    <p><strong>EOD</strong> — вечером: план vs факт. Автоматическое извлечение паттернов из дня.</p>
+                    <p><strong>Review</strong> — раз в неделю/месяц: прогресс по приоритетам + рекомендации модели.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Мониторинг</span><span class="mod-title">Pulse Monitor</span></div>
+                <div class="mod-body">
+                    <div class="flow">
+                        <span class="fn">Telegram</span><span class="fn">Задачи</span><span class="fn">Дедлайны</span>
+                        <span class="fa">→ каждые 2ч →</span>
+                        <span class="fn hi">Эскалация</span>
+                    </div>
+                    <p>Фоновая проверка. Матрица: 1 день → напоминание. 3 дня → руководитель. 5 дней → CEO.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Самообучение</span><span class="mod-title">Learnings + Feedback Loop</span></div>
+                <div class="mod-body">
+                    <div class="loop">
+                        <span>Действие</span><span class="la">→</span>
+                        <span>Результат</span><span class="la">→</span>
+                        <span>Паттерн</span><span class="la">→</span>
+                        <span>Память</span><span class="la">→</span>
+                        <span>Лучшее действие</span><span class="la">↻</span>
+                    </div>
+                    <p><strong>Learnings</strong> — compound learning. Каждый EOD извлекает: что сработало, что нет. Знания копятся, дедуплицируются.</p>
+                    <p><strong>Feedback Loop</strong> — CEO поправил → система запомнила навсегда. Ошибки не повторяются.</p>
+                    <p style="margin-top:8px;font-style:italic;color:var(--tx)">Агент не просто улучшает себя — он улучшает способ улучшения себя.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">CEO Council</span></div>
+                <div class="mod-body">
+                    <div class="council">
+                        <div class="council-agents">
+                            <div class="council-agent">CFO<small>финансы</small></div>
+                            <div class="council-agent">COO<small>операции</small></div>
+                            <div class="council-agent">Стратег<small>долгосрок</small></div>
+                            <div class="council-agent">Дьявол<small>риски</small></div>
+                        </div>
+                        <div class="council-down">↓ спорят независимо ↓</div>
+                        <div class="council-result">Синтез + решение с условиями</div>
+                    </div>
+                    <p>Для крупных решений. Четыре агента спорят. Каждый: за / против / с условиями. Обязательный блок «где не согласны». Адвокат дьявола не может быть мягким.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">Deep Research</span></div>
+                <div class="mod-body">
+                    <div class="flow">
+                        <span class="fn">Claude</span><span class="fn">Gemini</span><span class="fn">ChatGPT</span>
+                        <span class="fa">→ параллельно →</span>
+                        <span class="fn hi">Синтез</span>
+                    </div>
+                    <p>Мульти-модельный ресёрч. Где модели сходятся, где расходятся, что это значит. Если данных не хватает — честно пишет «INSUFFICIENT DATA».</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">Semantic Search</span></div>
+                <div class="mod-body">
+                    <p>Поиск по всему vault: документы, решения, встречи, голосовые заметки. По смыслу, не по словам. Находит то, что вы забыли что записывали.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Встречи</span><span class="mod-title">Call Prep & Debrief</span></div>
+                <div class="mod-body">
+                    <div class="flow">
+                        <span class="fn hi">Prep</span><span class="fa">→</span>
+                        <span class="fn ghost">встреча</span><span class="fa">→</span>
+                        <span class="fn hi">Debrief</span><span class="fa">→</span>
+                        <span class="fn">Задачи</span><span class="fn">Решения</span><span class="fn">Сигналы</span>
+                    </div>
+                    <p><strong>Prep</strong> — досье, история решений, вопросы для discovery, красные флаги.</p>
+                    <p><strong>Debrief</strong> — решения в лог, задачи в трекер, сигналы: тон, мотивация, скрытые конфликты.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Контент</span><span class="mod-title">Content Generation</span></div>
+                <div class="mod-body">
+                    <div class="flow">
+                        <span class="fn">Writer</span><span class="fa">→</span>
+                        <span class="fn">Critic</span><span class="fa">→</span>
+                        <span class="fn" style="font-size:.75rem">1–10</span><span class="fa">→</span>
+                        <span class="fn" style="font-size:.6875rem;color:var(--m2)">если &lt;9</span><span class="fa">↺</span>
+                        <span class="fn hi" style="font-size:.6875rem">≥9 → CEO</span>
+                    </div>
+                    <p>5 критериев: hook, ценность, аутентичность, actionability, шеринг. До 3 итераций. Из голосовых заметок → в публикации. Не звучит как ChatGPT — или переделывает.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Люди</span><span class="mod-title">People & Relationships</span></div>
+                <div class="mod-body">
+                    <p>Досье: роль, психометрика, история взаимодействий, тональные сдвиги. Кто выгорает, кто растёт, кто саботирует.</p>
+                </div>
+            </div>
+
+            <div class="mod r">
+                <div class="mod-head"><span class="mod-cat">Документы</span><span class="mod-title">OK Draft</span></div>
+                <div class="mod-body">
+                    <p>Шаблоны: регламенты, предложения, записки. Не пустые бланки — документы с данными из vault.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Data Flywheel -->
+    <section>
+        <p class="lbl r">Механика</p>
+        <h2 class="ttl r">Data Flywheel</h2>
+        <p class="lead r">Компания буквально улучшается от использования. Каждое действие делает систему умнее.</p>
+
+        <div class="flywheel r">
+            <div class="fw-step"><span class="fw-num">1</span>Агенты выполняют задачи</div>
+            <div class="fw-step"><span class="fw-num">2</span>Каждое выполнение → размеченные данные</div>
+            <div class="fw-step"><span class="fw-num">3</span>Данные → лучшие evals, модели, топологии</div>
+            <div class="fw-step"><span class="fw-num">4</span>Лучшие процессы → лучшие результаты</div>
+            <div class="fw-step"><span class="fw-num">↻</span>Цикл повторяется. Каждый день точнее.</div>
+        </div>
+
+        <p class="lead r">Каждый процесс — продукт: владелец, бэклог, OKR по метрикам. Юнит-экономика на процесс. Люди — не исполнители, а архитекторы eval и постановщики целей.</p>
+    </section>
+
+    <!-- Vision -->
+    <section>
+        <p class="lbl r">Vision</p>
+        <h2 class="ttl r">Куда</h2>
+
+        <div class="vis">
+            <div class="r">
+                <p class="vis-label">Сегодня</p>
+                <p class="vis-text">Голос → расшифровка → маршрутизация → исполнение. CEO 30 минут в день. Остальное — система.</p>
+            </div>
+            <div class="r">
+                <p class="vis-label">Завтра</p>
+                <p class="vis-text">Self-improving agents. Меняют свои промпты, память, инструменты. И меняют то, как они оценивают результат.</p>
+            </div>
+            <div class="r">
+                <p class="vis-label">Горизонт</p>
+                <p class="vis-text">Hyperagent: модифицирует свой код, свои eval-функции, свой способ хранить знания. Компания как RL-машина — обучается с подкреплением от каждого действия.</p>
+            </div>
+            <p class="vis-coda r">Не оптимизация процессов. Новая операционная модель.</p>
+        </div>
+    </section>
+
+    <footer><p>2026</p></footer>
+</div>
+
+<script>
+(function(){
+    var io=new IntersectionObserver(function(ee){
+        ee.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}})
+    },{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+    document.querySelectorAll('.r').forEach(function(el){io.observe(el)})
+})();
+</script>
+</body>
+</html>
