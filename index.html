@@ -3,399 +3,442 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI OS — операционный мозг компании</title>
+    <title>AI OS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,600;12..96,800&family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;1,7..72,400&display=swap" rel="stylesheet">
     <style>
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
         :root{
-            --fd:'Archivo',system-ui,sans-serif;--fb:'Spectral',Georgia,serif;
-            --bg:oklch(0.985 0.004 50);--sf:oklch(0.96 0.006 50);--bd:oklch(0.89 0.006 50);
-            --tx:oklch(0.15 0.012 50);--m1:oklch(0.38 0.008 50);--m2:oklch(0.52 0.006 50);
-            --hi:oklch(0.93 0.02 255);--hib:oklch(0.82 0.04 255);
-            --acc:oklch(0.35 0.1 255);
-            --mw:1100px
+            --fd:'Bricolage Grotesque',system-ui,sans-serif;
+            --fb:'Literata','Georgia',serif;
+            --bg:oklch(0.98 0.005 65);
+            --sf:oklch(0.955 0.008 65);
+            --sf2:oklch(0.935 0.01 65);
+            --bd:oklch(0.88 0.008 65);
+            --tx:oklch(0.14 0.015 65);
+            --tx2:oklch(0.35 0.01 65);
+            --tx3:oklch(0.50 0.008 65);
+            --acc:oklch(0.38 0.12 275);
+            --acc-light:oklch(0.92 0.03 275);
+            --dk-bg:oklch(0.13 0.015 65);
+            --dk-tx:oklch(0.93 0.008 65);
+            --dk-tx2:oklch(0.65 0.008 65);
+            --dk-sf:oklch(0.19 0.012 65);
+            --mw:1000px;
         }
-        html{font-size:17px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-        body{font-family:var(--fb);line-height:1.6;color:var(--tx);background:var(--bg)}
-        .c{max-width:var(--mw);margin:0 auto;padding:0 clamp(24px,5vw,56px)}
-        section{padding:clamp(56px,8vh,100px) 0}
 
-        /* ── Typography ── */
-        .lbl{font-family:var(--fd);font-weight:400;font-size:.8125rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc);margin-bottom:14px}
-        .ttl{font-family:var(--fd);font-weight:700;font-size:clamp(1.875rem,4vw,2.75rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:12px}
-        .sub{font-family:var(--fd);font-weight:400;font-size:clamp(1.0625rem,1.5vw,1.25rem);line-height:1.5;color:var(--m1);max-width:560px}
-
-        /* ── Hero ── */
-        .hero{padding:clamp(72px,12vh,140px) 0 clamp(48px,6vh,80px);max-width:760px}
-        .hero h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.75rem,7.5vw,5rem);line-height:1.04;letter-spacing:-.04em;margin-bottom:24px}
-        .hero .sub{margin-bottom:32px;max-width:580px}
-        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-        .stat{padding:20px;background:var(--sf)}
-        .stat-num{font-family:var(--fd);font-weight:800;font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
-        .stat-label{font-family:var(--fd);font-size:.875rem;font-weight:400;color:var(--m1);line-height:1.35}
-        @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
-
-        /* ── Pipeline (How it works) ── */
-        .pipe{display:flex;align-items:stretch;gap:4px;margin:24px 0}
-        .pipe-step{flex:1;padding:20px 16px;background:var(--sf);text-align:center;position:relative}
-        .pipe-step:last-child{background:var(--hi);border:1px solid var(--hib)}
-        .pipe-num{font-family:var(--fd);font-weight:300;font-size:.8125rem;color:var(--m2);margin-bottom:6px}
-        .pipe-icon{font-size:1.75rem;margin-bottom:8px;line-height:1}
-        .pipe-text{font-family:var(--fd);font-weight:600;font-size:.9375rem;line-height:1.35}
-        .pipe-sub{font-family:var(--fd);font-weight:400;font-size:.8125rem;color:var(--m1);margin-top:4px;line-height:1.3}
-        .pipe-arrow{display:flex;align-items:center;color:var(--m2);font-family:var(--fd);font-size:.875rem;flex-shrink:0}
-        @media(max-width:700px){.pipe{flex-wrap:wrap}.pipe-step{flex:1 0 45%}.pipe-arrow{display:none}}
-
-        /* ── Result cards ── */
-        .results{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-        .result{padding:28px 24px;background:var(--sf)}
-        .result-icon{font-size:1.5rem;margin-bottom:10px}
-        .result-title{font-family:var(--fd);font-weight:700;font-size:1.125rem;line-height:1.2;margin-bottom:10px;letter-spacing:-.01em}
-        .result-text{font-size:1rem;line-height:1.55;color:var(--m1)}
-        .result-text ul{margin:0;padding-left:18px;list-style:none}
-        .result-text li{position:relative;padding-left:0;margin-bottom:3px}
-        .result-text li::before{content:"→";position:absolute;left:-18px;color:var(--acc)}
-        .result-text strong{color:var(--tx);font-weight:500}
-        .result.wide{grid-column:1/-1}
-        @media(max-width:600px){.results{grid-template-columns:1fr}}
-
-        /* ── Compact modules ── */
-        .modules{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-        .mod-card{padding:20px;background:var(--sf)}
-        .mod-card{padding:24px}
-        .mod-card-title{font-family:var(--fd);font-weight:600;font-size:1.0625rem;margin-bottom:6px}
-        .mod-card-desc{font-size:.9375rem;line-height:1.5;color:var(--m1)}
-        @media(max-width:600px){.modules{grid-template-columns:1fr}}
-
-        /* ── Flow diagram ── */
-        .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:16px 0}
-        .fn{font-family:var(--fd);font-size:.9375rem;font-weight:500;padding:10px 16px;background:var(--sf);border:1px solid var(--bd)}
-        .fn.hi{background:var(--hi);border-color:var(--hib)}
-        .fn.ghost{border-style:dashed;color:var(--m2)}
-        .fa{font-family:var(--fd);font-size:.9375rem;color:var(--m2)}
-
-        /* ── Stack ── */
-        .stack{display:flex;flex-direction:column;gap:3px;max-width:600px}
-        .sr{display:flex;align-items:baseline;gap:16px;padding:14px 20px;background:var(--sf);font-family:var(--fd);font-size:.9375rem}
-        .sr-n{font-weight:300;color:var(--m2);min-width:22px}
-        .sr-name{font-weight:600;min-width:150px}
-        .sr-brief{font-weight:400;color:var(--m1);font-size:.875rem}
-        @media(max-width:600px){.sr{flex-wrap:wrap;gap:4px 12px}.sr-brief{flex-basis:100%;padding-left:38px}}
-
-        /* ── Tags ── */
-        .tags{display:flex;flex-wrap:wrap;gap:4px;margin:16px 0}
-        .tag{font-family:var(--fd);font-size:.875rem;font-weight:500;padding:10px 16px;background:var(--sf);border:1px solid var(--bd)}
-        .tag.on{border-color:var(--hib);background:var(--hi)}
-
-        /* ── Flywheel ── */
-        .fw{display:flex;flex-direction:column;gap:3px;max-width:520px}
-        .fw-s{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--sf);font-family:var(--fd);font-size:.9375rem}
-        .fw-n{font-weight:300;color:var(--m2);min-width:20px}
-        .fw-s:last-child{background:var(--hi);border:1px solid var(--hib);font-weight:600}
-
-        /* ── Vision ── */
-        .vis{max-width:560px;display:flex;flex-direction:column;gap:28px}
-        .vis-label{font-family:var(--fd);font-weight:700;font-size:1.0625rem;margin-bottom:4px}
-        .vis-text{font-size:1.0625rem;line-height:1.6;color:var(--m1);max-width:460px}
-        .vis-coda{font-style:italic;font-size:clamp(1.125rem,1.5vw,1.375rem);line-height:1.45;margin-top:8px;max-width:440px}
-
-        footer{padding:64px 0 32px}
-        footer p{font-family:var(--fd);font-weight:300;font-size:.75rem;color:var(--m2)}
-
-        .r{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out,transform .45s ease-out}
+        html{font-size:clamp(17px,1.2vw,20px);-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+        body{font-family:var(--fb);line-height:1.65;color:var(--tx);background:var(--bg)}
+        .w{max-width:var(--mw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+        section{padding:clamp(80px,14vh,180px) 0}
+        .r{opacity:0;transform:translateY(10px);transition:opacity .5s ease-out,transform .5s ease-out}
         .r.v{opacity:1;transform:translateY(0)}
         @media(prefers-reduced-motion:reduce){.r{opacity:1;transform:none;transition:none}}
+
+        .label{font-family:var(--fd);font-weight:400;font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--tx3);margin-bottom:16px}
+        h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.8rem,7vw,4.8rem);line-height:1.02;letter-spacing:-.04em}
+        h2{font-family:var(--fd);font-weight:800;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.06;letter-spacing:-.03em}
+        .lead{font-family:var(--fb);font-size:clamp(1.1rem,1.4vw,1.3rem);line-height:1.65;color:var(--tx2);max-width:640px}
+
+        /* ═══ HERO ═══ */
+        .hero{padding:clamp(120px,18vh,240px) 0 clamp(80px,10vh,140px)}
+        .hero h1{margin-bottom:24px;max-width:800px}
+        .hero .lead{margin-bottom:48px}
+        .hero-facts{display:flex;flex-wrap:wrap;gap:10px 36px;font-family:var(--fd);font-size:.95rem;color:var(--tx2)}
+        .hero-facts span::before{content:'';display:inline-block;width:6px;height:6px;background:var(--acc);border-radius:50%;margin-right:10px;vertical-align:middle}
+
+        /* ═══ CONTEXT GRID ═══ */
+        .context-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:32px 0}
+        .ctx{padding:28px 24px;background:var(--sf)}
+        .ctx-title{font-family:var(--fd);font-weight:600;font-size:1.05rem;margin-bottom:8px}
+        .ctx-text{font-family:var(--fd);font-size:.92rem;line-height:1.55;color:var(--tx2)}
+        @media(max-width:600px){.context-grid{grid-template-columns:1fr}}
+
+        /* ═══ DARK SECTION ═══ */
+        .dark{background:var(--dk-bg);color:var(--dk-tx);margin:0 calc(-1*clamp(20px,5vw,48px));padding-left:clamp(20px,5vw,48px);padding-right:clamp(20px,5vw,48px)}
+        .dark .label{color:var(--dk-tx2)}
+        .dark .lead{color:var(--dk-tx2)}
+        .dark h2{color:var(--dk-tx)}
+
+        .day-grid{display:grid;grid-template-columns:60px 1fr;gap:6px 24px;margin:36px 0;max-width:700px}
+        .day-time{font-family:var(--fd);font-weight:300;font-size:.88rem;color:var(--dk-tx2);text-align:right;padding-top:4px}
+        .day-item{font-family:var(--fd);font-size:.95rem;padding:10px 0;border-bottom:1px solid oklch(0.22 0.01 65);line-height:1.55}
+        .day-item strong{font-weight:600;color:var(--dk-tx);display:block;margin-bottom:2px}
+        .day-item span{font-weight:300;color:var(--dk-tx2);font-size:.88rem;line-height:1.5}
+
+        .dark-note{font-family:var(--fd);font-size:.9rem;color:var(--dk-tx2);margin-top:24px;line-height:1.5}
+
+        /* ═══ RESULT BLOCKS ═══ */
+        .result-block{margin:28px 0}
+        .rb-text{font-family:var(--fb);font-size:1.05rem;line-height:1.65;color:var(--tx2);max-width:640px}
+
+        /* ═══ QUOTE ═══ */
+        .quote-block{margin:32px 0;padding:32px 36px;background:var(--sf)}
+        .quote-block p{font-family:var(--fb);font-style:italic;font-size:1.1rem;line-height:1.6;color:var(--tx2)}
+        .quote-block .q-tag{font-family:var(--fd);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--acc);margin-bottom:10px}
+
+        /* ═══ STEPS ═══ */
+        .steps{display:flex;flex-direction:column;gap:2px;margin:32px 0;max-width:640px}
+        .step{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:18px 22px;background:var(--sf);align-items:baseline}
+        .step-n{font-family:var(--fd);font-weight:800;font-size:.9rem;color:var(--tx3)}
+        .step-text{font-family:var(--fd);font-size:.95rem;line-height:1.5;color:var(--tx2)}
+        .step-text strong{color:var(--tx);font-weight:600}
+
+        /* ═══ COMPARISON ═══ */
+        .compare{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:32px 0}
+        .cmp{padding:28px 24px}
+        .cmp:first-child{background:var(--sf)}
+        .cmp:last-child{background:var(--acc-light)}
+        .cmp-title{font-family:var(--fd);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:16px}
+        .cmp:first-child .cmp-title{color:var(--tx3)}
+        .cmp:last-child .cmp-title{color:var(--acc)}
+        .cmp ul{list-style:none;padding:0}
+        .cmp li{font-family:var(--fd);font-size:.95rem;line-height:1.55;color:var(--tx2);padding:6px 0}
+        .cmp:last-child li{color:var(--tx)}
+        @media(max-width:600px){.compare{grid-template-columns:1fr}}
+
+        /* ═══ PILLARS ═══ */
+        .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin:32px 0}
+        .pil{padding:24px 18px;background:var(--sf)}
+        .pil-title{font-family:var(--fd);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+        .pil-text{font-family:var(--fd);font-size:.88rem;line-height:1.55;color:var(--tx2)}
+        @media(max-width:700px){.pillars{grid-template-columns:1fr 1fr}}
+        @media(max-width:480px){.pillars{grid-template-columns:1fr}}
+
+        /* ═══ HIGHLIGHT ═══ */
+        .hl{margin:32px 0;padding:28px 32px;background:var(--sf2);font-family:var(--fb);font-size:1.05rem;line-height:1.65;color:var(--tx2)}
+        .hl strong{color:var(--tx);font-weight:500}
+
+        /* ═══ PROOF ═══ */
+        .proof{display:flex;flex-wrap:wrap;gap:12px 28px;font-family:var(--fd);font-size:.85rem;color:var(--tx3);margin-top:20px}
+
+        /* ═══ FLYWHEEL ═══ */
+        .fw-steps{display:flex;flex-direction:column;gap:2px;margin:32px 0;max-width:520px}
+        .fw-s{display:flex;align-items:center;gap:14px;padding:16px 22px;background:var(--sf);font-family:var(--fd);font-size:.95rem}
+        .fw-n{font-weight:300;color:var(--tx3);min-width:22px}
+        .fw-s:last-child{background:var(--acc-light);font-weight:600;color:var(--acc)}
+
+        /* ═══ CLOSING ═══ */
+        .closing{padding:clamp(120px,18vh,240px) 0 clamp(80px,10vh,120px)}
+        .closing h2{font-size:clamp(2.5rem,6vw,4.2rem);margin-bottom:24px}
+
+        .vis-rows{display:flex;flex-direction:column;gap:2px;margin:40px 0;max-width:640px}
+        .vis-r{display:grid;grid-template-columns:100px 1fr;gap:20px;padding:16px 22px;background:var(--sf);align-items:baseline}
+        .vis-l{font-family:var(--fd);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em}
+        .vis-t{font-family:var(--fd);font-size:.95rem;color:var(--tx2);line-height:1.55}
+        @media(max-width:480px){.vis-r{grid-template-columns:1fr;gap:4px}}
+
+        footer{padding:64px 0 32px}
+        footer p{font-family:var(--fd);font-weight:300;font-size:.72rem;color:var(--tx3)}
     </style>
 </head>
 <body>
-<div class="c">
 
-    <!-- ════ HERO ════ -->
+<div class="w">
+
+    <!-- ═══ HERO ═══ -->
     <section class="hero">
-        <h1 class="r">AI уже умнее вашей команды. Сделайте его мозгом компании.</h1>
-        <p class="sub r">Он помнит каждое решение, каждый разговор, каждый зум. Видит то, что люди пропускают. Работает в 100 раз быстрее. И не устаёт.</p>
-        <div class="stats r">
-            <div class="stat"><div class="stat-num">100×</div><div class="stat-label">быстрее человека</div></div>
-            <div class="stat"><div class="stat-num">∞</div><div class="stat-label">память и контекст</div></div>
-            <div class="stat"><div class="stat-num">0</div><div class="stat-label">потерянных решений</div></div>
-            <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">без усталости и bias</div></div>
+        <h1 class="r">Компания без AI-мозга —<br>как компания без интернета<br>в 2005.</h1>
+        <p class="lead r" style="font-family:var(--fd);font-weight:600;font-size:clamp(1.3rem,2vw,1.6rem);color:var(--tx);margin-bottom:20px">Она ещё работает. Но уже проиграла.</p>
+        <p class="lead r">AI, который знает о компании всё и управляет операционкой. CEO тратит 30 минут в день. Система уже работает.</p>
+
+        <div class="hero-facts r">
+            <span>Весь контекст компании в системе</span>
+            <span>CEO тратит 30 мин/день</span>
+            <span>Система уже работает</span>
         </div>
     </section>
 
-    <!-- ════ КАК ЭТО РАБОТАЕТ ════ -->
+    <!-- ═══ CONTEXT = FOUNDATION ═══ -->
     <section>
-        <p class="lbl r">Как это работает</p>
-        <h2 class="ttl r">Надиктовал — полетело</h2>
-        <p class="sub r" style="margin-bottom:24px">CEO говорит голосом. Система расщепляет на задачи, раздаёт агентам, исполняет. Утром — результат.</p>
+        <p class="label r">Фундамент</p>
+        <h2 class="r">Весь контекст компании —<br>в одной системе.</h2>
+        <p class="lead r" style="margin-top:16px">Для того чтобы AI реально работал — ему нужен контекст. Не чатик с промптами, а полная картина: кто, что, зачем, когда, с каким результатом. Мы это построили.</p>
 
-        <div class="pipe r">
-            <div class="pipe-step">
-                <div class="pipe-icon">🎤</div>
-                <div class="pipe-text">Голос / Зум</div>
-                <div class="pipe-sub">Рефлексия, встреча, звонок</div>
+        <div class="context-grid r">
+            <div class="ctx">
+                <div class="ctx-title">Каждая встреча и звонок</div>
+                <div class="ctx-text">Все зум-записи, звонки, рефлексии CEO фиксируются и расшифровываются. Задачи, решения, контекст извлекаются автоматически. Ничего не теряется.</div>
             </div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step">
-                <div class="pipe-icon">🧠</div>
-                <div class="pipe-text">AI расщепляет</div>
-                <div class="pipe-sub">Задачи, решения, контекст</div>
+            <div class="ctx">
+                <div class="ctx-title">Лог решений</div>
+                <div class="ctx-text">Каждое решение за всю историю компании. AI проверяет новые решения на противоречия с прошлыми. Нет &laquo;хождения по кругу&raquo;.</div>
             </div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step">
-                <div class="pipe-icon">⚡</div>
-                <div class="pipe-text">Агенты делают</div>
-                <div class="pipe-sub">Параллельно, автономно</div>
+            <div class="ctx">
+                <div class="ctx-title">Люди и отношения</div>
+                <div class="ctx-text">Профили, психометрика, история взаимодействий, тональные сдвиги. Система знает команду лучше, чем HR.</div>
             </div>
-            <div class="pipe-arrow">→</div>
-            <div class="pipe-step">
-                <div class="pipe-icon">✓</div>
-                <div class="pipe-text">CEO: да / нет</div>
-                <div class="pipe-sub">Проблема → варианты → рекомендация</div>
-            </div>
-        </div>
-
-        <p class="sub r" style="margin-top:20px">Всё фиксируется: кто-то на зуме сказал «задачу закрыл» — система записала. Нет артефакта — бот в Telegram пингует ответственного. Задачи не теряются.</p>
-    </section>
-
-    <!-- ════ РЕЗУЛЬТАТЫ ════ -->
-    <section>
-        <p class="lbl r">Результаты</p>
-        <h2 class="ttl r">Уже влияет на деньги</h2>
-        <p class="sub r" style="margin-bottom:24px">Не теория. Система имеет весь контекст компании и уже меняет результаты в каждом отделе.</p>
-
-        <div class="results r">
-
-            <div class="result">
-                <div class="result-icon">🎯</div>
-                <div class="result-title">Решения точнее. Ошибки не повторяются.</div>
-                <div class="result-text"><ul>
-                    <li>Помнит каждое решение за всю историю</li>
-                    <li>Проверяет противоречия с прошлыми решениями</li>
-                    <li>Нет «хождения по кругу» — если обсуждали, покажет когда и что решили</li>
-                </ul></div>
-            </div>
-
-            <div class="result">
-                <div class="result-icon">📡</div>
-                <div class="result-title">Реклама на автопилоте.</div>
-                <div class="result-text"><ul>
-                    <li>Анализ каждую неделю: какие заголовки работают</li>
-                    <li>Сама предлагает новые объявления на основе данных</li>
-                    <li>Самообучающаяся: чем дольше работает, тем дешевле лид</li>
-                    <li>Дашборд с метриками в реальном времени</li>
-                </ul></div>
-            </div>
-
-            <div class="result">
-                <div class="result-icon">💬</div>
-                <div class="result-title">Суфлёр для продаж. Конверсия растёт.</div>
-                <div class="result-text"><ul>
-                    <li>Подсказывает менеджеру <strong>одну вещь</strong> прямо во время звонка</li>
-                    <li>Как отработать конкретное возражение</li>
-                    <li>Когда закрывать сделку</li>
-                    <li>Загружена вся история успешных продаж</li>
-                </ul></div>
-            </div>
-
-            <div class="result">
-                <div class="result-icon">⚖️</div>
-                <div class="result-title">Суфлёр для юристов. Побеждают чаще.</div>
-                <div class="result-text"><ul>
-                    <li>Вся практика, все прецеденты, все аргументы судов — в памяти</li>
-                    <li>Какую стратегию выбрать по конкретному делу</li>
-                    <li>Что сработало в похожих кейсах раньше</li>
-                    <li>Каждое следующее дело сильнее предыдущего</li>
-                </ul></div>
-            </div>
-
-            <div class="result">
-                <div class="result-icon">👥</div>
-                <div class="result-title">Проблемы с людьми видны до кризиса.</div>
-                <div class="result-text"><ul>
-                    <li>Каждый зум анализируется: тон, мотивация, вовлечённость</li>
-                    <li>Видит динамику всей команды, не одного человека</li>
-                    <li>Кто выгорает, кто растёт, кто саботирует</li>
-                    <li>Предупреждает до того, как потеряете сотрудника</li>
-                </ul></div>
-            </div>
-
-            <div class="result">
-                <div class="result-icon">🤖</div>
-                <div class="result-title">Бот в чатах. Задачи не теряются.</div>
-                <div class="result-text"><ul>
-                    <li>AI-бот в Telegram команды</li>
-                    <li>Пингует по задачам, напоминает дедлайны</li>
-                    <li>Сотрудники берут задачи прямо в чате</li>
-                    <li>Эскалация: 1д → напоминание, 3д → руководитель, 5д → CEO</li>
-                </ul></div>
+            <div class="ctx">
+                <div class="ctx-title">Процессы и регламенты</div>
+                <div class="ctx-text">Бенчмарки, скрипты продаж, судебная практика, внутренние регламенты. AI даёт рекомендации на основе данных, а не догадок.</div>
             </div>
         </div>
     </section>
 
-    <!-- ════ ПОСТМИТ — РЕКОМЕНДАТЕЛЬНАЯ СИСТЕМА ════ -->
+    <!-- ═══ WHAT GETS LOADED ═══ -->
     <section>
-        <p class="lbl r">Каждая встреча</p>
-        <h2 class="ttl r">Не просто запись. Рекомендательная система.</h2>
-        <p class="sub r" style="margin-bottom:24px">После каждого зума AI не просто пишет саммари. Он загружает весь контекст компании и даёт рекомендации.</p>
+        <p class="label r">Что загружается в систему</p>
+        <h2 class="r">Точка А — точка Б.<br>Вся картина целиком.</h2>
+        <p class="lead r" style="margin-top:16px">Прежде чем AI начнёт давать рекомендации — он загружает полный срез: где компания сейчас, что было до, куда идём. Не верхнеуровневое описание, а конкретика.</p>
 
-        <div class="flow r">
-            <span class="fn">Зум-запись</span><span class="fa">→</span>
-            <span class="fn">Транскрипция</span><span class="fa">→</span>
-            <span class="fn hi">+ 60K токенов контекста</span><span class="fa">→</span>
-            <span class="fn hi">Рекомендации</span>
-        </div>
-
-        <div class="results r" style="margin-top:16px">
-            <div class="result">
-                <div class="result-title">3 слоя контекста на каждую встречу</div>
-                <div class="result-text"><ul>
-                    <li><strong>Индекс</strong> — карта компании: кто, что, зачем</li>
-                    <li><strong>Глубокий</strong> — тактика именно по теме встречи (бенчмарки, скрипты, цифры)</li>
-                    <li><strong>Операционный</strong> — таск-борд, чтобы не дублировать решения</li>
-                </ul></div>
+        <div class="context-grid r">
+            <div class="ctx">
+                <div class="ctx-title">Стратегический анализ</div>
+                <div class="ctx-text">Текущее состояние каждого отдела. Целевое состояние. Разрыв между ними. Приоритеты P1-P6 с декомпозицией.</div>
             </div>
-            <div class="result">
-                <div class="result-title">На выходе — не саммари, а рекомендации</div>
-                <div class="result-text"><ul>
-                    <li>Что вы сделали правильно</li>
-                    <li>Где риски и слепые зоны</li>
-                    <li>Противоречия с прошлыми решениями</li>
-                    <li>Конкретные рекомендации со ссылками на данные</li>
-                </ul></div>
+            <div class="ctx">
+                <div class="ctx-title">Competitive intelligence</div>
+                <div class="ctx-text">Мониторинг конкурентов, лучшие практики рынка, бенчмарки — загружено и обновляется. AI сравнивает ваши решения с рыночными данными.</div>
+            </div>
+            <div class="ctx">
+                <div class="ctx-title">Наши провалы и байесы</div>
+                <div class="ctx-text">История ошибок, когнитивных искажений, неправильных решений. AI знает, где вы уже ошибались — и не даст повторить.</div>
+            </div>
+            <div class="ctx">
+                <div class="ctx-title">Успешные действия</div>
+                <div class="ctx-text">Что сработало, какие подходы дали результат, какие решения оказались правильными. AI усиливает то, что уже работает.</div>
             </div>
         </div>
     </section>
 
-    <!-- ════ CEO РЕЖИМ ════ -->
+    <!-- ═══ POSTMEET ═══ -->
     <section>
-        <p class="lbl r">Для CEO</p>
-        <h2 class="ttl r">30 минут в день. Всё под контролем.</h2>
+        <p class="label r">Рекомендательная система</p>
+        <h2 class="r">Не саммари.<br>AI проверяет каждое решение.</h2>
+        <p class="lead r" style="margin-top:16px">После каждого зума AI индексирует контекст компании через Obsidian и QMD — и проверяет каждое ваше решение. Где когнитивное искажение? Где слепая зона? Где вы противоречите прошлому решению? На выходе — аргументированные рекомендации со ссылками на данные.</p>
 
-        <div class="modules r">
-            <div class="mod-card">
-                <div class="mod-card-title">🌅 Утренний дайджест</div>
-                <div class="mod-card-desc">Что за 24 часа, что на сегодня, что просрочено. Привязан к стратегическим приоритетам. В Telegram, за 2 минуты.</div>
+        <div class="quote-block r">
+            <div class="q-tag">Пример рекомендации из реального постмита</div>
+            <p>&laquo;В речи руководителя отдела исполнения замечено разочарование в собственных результатах. На этом человеке держится операционка компании. Рекомендация: срочный 1-on-1 в ближайшие 48 часов. Риск: когнитивное искажение &mdash; сотрудник недооценивает свой вклад и может принять решение об уходе. Без вмешательства вероятность потери ключевого сотрудника &mdash; высокая.&raquo;</p>
+        </div>
+
+        <div class="result-block r">
+            <div class="rb-text">Фиксируются все задачи и решения. Эскалируется CEO. Предупреждаются проблемы до того, как они случатся. Каждый постмит содержит: фидбэк на когнитивные искажения и байесы, слепые зоны, противоречия с прошлыми решениями, и конкретные рекомендации что с этим делать.</div>
+        </div>
+    </section>
+
+    <!-- ═══ CEO MODE (dark) ═══ -->
+    <section class="dark">
+        <p class="label r">Режим CEO</p>
+        <h2 class="r">30 минут в день.<br>Полный контроль.</h2>
+        <p class="lead r" style="margin-top:16px">CEO говорит голосом 15-30 минут — 7 тем вперемешку. Система расщепляет на задачи, раздаёт агентам, исполняет. Утром — дайджест. Днём — решения. Вечером — итоги.</p>
+
+        <div class="day-grid r">
+            <span class="day-time">08:00</span>
+            <div class="day-item">
+                <strong>Утренний дайджест</strong>
+                <span>Что произошло за 24 часа — с конкретными цифрами. Что на сегодня — привязано к стратегическим приоритетам. Что просрочено. Идеи из вчерашних рефлексий CEO. В Telegram, 500 слов, 2 минуты на прочтение. Если есть решения, ожидающие одобрения — ссылка.</span>
             </div>
-            <div class="mod-card">
-                <div class="mod-card-title">🎯 Фокус дня</div>
-                <div class="mod-card-desc">Не абстрактные цели — конкретные действия на сегодня. Что двигает стратегию вперёд.</div>
+
+            <span class="day-time">Утро</span>
+            <div class="day-item">
+                <strong>Голосовая рефлексия</strong>
+                <span>CEO надиктовал 15-30 минут — 7 тем вперемешку. Система расшифровала, расщепила по темам, на каждую тему назначила отдельного агента. Агенты работают параллельно. Через час — результат по каждой теме. CEO решает: да или нет. &laquo;Нет&raquo; = система переделывает и предлагает заново.</span>
             </div>
-            <div class="mod-card">
-                <div class="mod-card-title">📋 ЗРС — быстрые решения</div>
-                <div class="mod-card-desc">Проблема → 2-3 варианта → рекомендация. CEO отвечает да/нет. Работа не останавливается.</div>
+
+            <span class="day-time">Днём</span>
+            <div class="day-item">
+                <strong>ЗРС — быстрые решения</strong>
+                <span>Проблема в одном предложении. Вариант A и вариант B — с плюсами, минусами, стоимостью. Рекомендация, какой выбрать и почему. CEO отвечает: A, B или &laquo;переделать&raquo;. Работа никогда не останавливается в ожидании решения.</span>
             </div>
-            <div class="mod-card">
-                <div class="mod-card-title">🌙 Итоги дня</div>
-                <div class="mod-card-desc">План vs факт. Что сделано, что нет, почему. Автоматическое извлечение паттернов.</div>
+
+            <span class="day-time">18:00</span>
+            <div class="day-item">
+                <strong>Итоги дня</strong>
+                <span>План утра vs реальность вечера. Что сделано, что нет и почему. Новые решения за день. Новые задачи. Извлечённые паттерны — не абстрактные, а конкретные: &laquo;встречи с Татьяной всегда затягиваются на 20 мин — закладывай буфер&raquo;.</span>
             </div>
-            <div class="mod-card">
-                <div class="mod-card-title">📊 Недельный обзор</div>
-                <div class="mod-card-desc">Прогресс по каждому приоритету. Рекомендации: что работает, что нет, куда смотреть.</div>
+
+            <span class="day-time">Пт</span>
+            <div class="day-item">
+                <strong>Недельный обзор</strong>
+                <span>Прогресс по каждому стратегическому приоритету: зелёный, жёлтый, красный. Метрики с трендами. Что работает, что нет. Рекомендации на следующую неделю. Открытые вопросы, требующие решения CEO.</span>
             </div>
-            <div class="mod-card">
-                <div class="mod-card-title">🏛 Совет директоров</div>
-                <div class="mod-card-desc">CFO, COO, стратег, адвокат дьявола — 4 агента спорят. Для крупных решений без слепых зон.</div>
+
+            <span class="day-time">Крупное</span>
+            <div class="day-item">
+                <strong>Совет директоров</strong>
+                <span>4 AI-агента: CFO считает деньги, COO оценивает нагрузку на команду, Стратег смотрит на 6-12 месяцев вперёд, Адвокат дьявола ломает идею. Каждый даёт вердикт. Обязательное инакомыслие — если все согласны, стратег обязан усомниться. Финальный документ: синтез, условия запуска, триггер отката.</span>
+            </div>
+        </div>
+
+        <p class="dark-note r">Каждый раз когда CEO даёт фидбэк — система запоминает навсегда и автоматически применяет ко всем будущим выводам. Core Memory обновляется после каждой коррекции.</p>
+    </section>
+
+    <!-- ═══ EXECUTION ═══ -->
+    <section>
+        <p class="label r">Исполнение</p>
+        <h2 class="r">Задачи не теряются.<br>Никогда.</h2>
+        <p class="lead r" style="margin-top:16px">Кто-то на зуме сказал &laquo;я это сделаю к пятнице&raquo; — система зафиксировала. Задача создана автоматически. Дедлайн назначен. Ответственный определён. Дальше за исполнением следит AI-бот в рабочих чатах Telegram — 7 фоновых проверок каждые 30 минут.</p>
+
+        <div class="steps r">
+            <div class="step">
+                <span class="step-n">1д</span>
+                <span class="step-text"><strong>Напоминание</strong> — бот пингует ответственного: задача просрочена</span>
+            </div>
+            <div class="step">
+                <span class="step-n">3д</span>
+                <span class="step-text"><strong>Эскалация</strong> — руководитель получает алерт с контекстом</span>
+            </div>
+            <div class="step">
+                <span class="step-n">5д</span>
+                <span class="step-text"><strong>CEO</strong> — получает ЗРС: проблема, варианты решения, рекомендация</span>
+            </div>
+        </div>
+
+        <div class="result-block r">
+            <div class="rb-text">OpenClaw бегает за каждым руководителем. Задача поставлена без дедлайна — бот добивается дедлайна. Задача закрыта без артефакта — бот запрашивает артефакт, соответствующий definition of done. Задача поставлена некачественно — бот доуточняет. Задачи автоматически ставятся, доуточняются, контролируются и закрываются.</div>
+        </div>
+    </section>
+
+    <!-- ═══ ADVERTISING ═══ -->
+    <section>
+        <p class="label r">Реклама</p>
+        <h2 class="r">AI делает 80-95%<br>рекламной операционки.</h2>
+        <p class="lead r" style="margin-top:16px">Конкуренты скрейпятся 4 раза в день. AI генерирует заголовки — статистика оценивает по прибыли, не по CTR. Выжившие масштабируются. Больные кампании паузятся автоматически. Самообучающаяся система: каждое выигравшее и проигравшее объявление логируется с разбором — следующий раунд генерации точнее предыдущего.</p>
+
+        <div class="pillars r">
+            <div class="pil">
+                <div class="pil-title">Офферы</div>
+                <div class="pil-text">Скрейпинг конкурентов 4&times;/день с 3 поведенческими профилями. LLM классифицирует и ранжирует по силе: частота &times; долговечность.</div>
+            </div>
+            <div class="pil">
+                <div class="pil-title">Заголовки</div>
+                <div class="pil-text">AI генерирует заголовки на основе банка выигравших формулировок. Статистика отбирает победителей. Проигравшие анализируются: почему не сработало.</div>
+            </div>
+            <div class="pil">
+                <div class="pil-title">Здоровье</div>
+                <div class="pil-text">Мониторинг кампаний 4&times;/день. 4 уровня алертов: от жёлтого предупреждения до красной паузы. Точность 90% на ключевых сигналах.</div>
+            </div>
+            <div class="pil">
+                <div class="pil-title">Конверсия</div>
+                <div class="pil-text">A/B тесты на лендингах. Message match: заголовок объявления = заголовок лендинга. Оценка по квал-лидам, не по заявкам.</div>
+            </div>
+        </div>
+
+        <p class="lead r" style="margin-top:4px"><strong style="color:var(--tx);font-family:var(--fd);font-weight:600">Profit&nbsp;=&nbsp;(sCPA&nbsp;&minus;&nbsp;CPA)&nbsp;&times;&nbsp;N</strong> &mdash; всегда оптимизируем прибыль, не&nbsp;CPA. Бывают дорогие лиды, которые конвертируются в&nbsp;3&times; лучше дешёвых.</p>
+
+        <div class="proof r">
+            <span>11 аккаунтов на мониторинге</span>
+            <span>214 токсичных площадок в блэклисте</span>
+            <span>3-уровневый разбор каждого объявления</span>
+            <span>Еженедельный дашборд с рекомендациями</span>
+        </div>
+    </section>
+
+    <!-- ═══ SALES ═══ -->
+    <section>
+        <p class="label r">Продажи</p>
+        <h2 class="r">Суфлёр подсказывает<br>одно действие, которое<br>повысит вероятность продажи.</h2>
+        <p class="lead r" style="margin-top:16px">Не десять советов. Одно конкретное действие прямо сейчас: что сказать, как отработать это возражение, когда закрывать. AI транскрибирует каждый звонок, автоматически скорит и даёт обратную связь. Потом моделирует слабые места — менеджер тренируется с AI-тренером до следующего живого звонка.</p>
+
+        <div class="hl r">
+            Один менеджер: <strong>0% конверсии</strong> с военными клиентами. Другой с ними же: <strong>100%</strong>. Целиком вопрос совпадения личности. Система знает 6 архетипов клиентов — Тигр, Лиса, Волк, Медведь, Мышь, Обезьяна — и матчит менеджера с типом клиента.
+        </div>
+
+        <div class="result-block r">
+            <div class="rb-text">Конверсия менеджера упала ниже 15% за 14 дней — автоматический 1-on-1. В 90% случаев причина психологическая, не навыковая. Система видит это раньше руководителя и подсказывает что делать: дать выходной, снизить нагрузку, провести разговор.</div>
+        </div>
+    </section>
+
+    <!-- ═══ LEGAL ═══ -->
+    <section>
+        <p class="label r">Юридика</p>
+        <h2 class="r">2 юриста вместо 6.</h2>
+        <p class="lead r" style="margin-top:16px">AI анализирует судебную практику, генерирует заявления, пишет ЗОС, распознаёт документы. Вся информация по клиенту заливается в систему — и AI создаёт стратегию на основе практики, прецедентов и внутренних регламентов. Юрист фокусируется на стратегии — рутину берёт система.</p>
+
+        <div class="compare r">
+            <div class="cmp">
+                <div class="cmp-title">Без AI</div>
+                <ul>
+                    <li>6 юристов на рутине</li>
+                    <li>Ручной анализ практики</li>
+                    <li>Заявления пишутся с нуля</li>
+                    <li>Документы распознаются вручную</li>
+                    <li>Стратегия из головы</li>
+                </ul>
+            </div>
+            <div class="cmp">
+                <div class="cmp-title">С AI OS</div>
+                <ul>
+                    <li>2 юриста на стратегии</li>
+                    <li>AI анализирует все прецеденты</li>
+                    <li>Черновик заявления за минуты</li>
+                    <li>Автоматическое распознавание</li>
+                    <li>Стратегия на основе данных и регламентов</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <!-- ════ САМООБУЧЕНИЕ ════ -->
+    <!-- ═══ PEOPLE ═══ -->
     <section>
-        <p class="lbl r">Механика</p>
-        <h2 class="ttl r">Каждый день умнее, чем вчера</h2>
-        <p class="sub r" style="margin-bottom:24px">Система не просто работает — она учится. И учится учиться.</p>
+        <p class="label r">Люди</p>
+        <h2 class="r">Видит то, что<br>руководитель пропускает.</h2>
+        <p class="lead r" style="margin-top:16px">Психометрика каждого сотрудника: эннеаграмма, Big Five, динамика настроения. Основано на зумах и взаимодействиях — обновляется после каждой встречи. Позволяет оценить динамическое соответствие профилю: не кем человек был на собеседовании, а кем он является сейчас.</p>
 
-        <div class="fw r">
-            <div class="fw-s"><span class="fw-n">1</span>Агенты выполняют задачи</div>
-            <div class="fw-s"><span class="fw-n">2</span>Каждое действие → размеченные данные</div>
-            <div class="fw-s"><span class="fw-n">3</span>Данные → лучшие модели и процессы</div>
-            <div class="fw-s"><span class="fw-n">4</span>CEO поправил → система запомнила навсегда</div>
-            <div class="fw-s"><span class="fw-n">↻</span>Каждый день точнее. Ошибки не повторяются.</div>
+        <div class="steps r">
+            <div class="step">
+                <span class="step-n">01</span>
+                <span class="step-text"><strong>Психометрический профиль</strong> — эннеаграмма, Big Five, стиль коммуникации, история взаимодействий</span>
+            </div>
+            <div class="step">
+                <span class="step-n">02</span>
+                <span class="step-text"><strong>Динамика настроения</strong> — тональные сдвиги фиксируются на каждой встрече автоматически</span>
+            </div>
+            <div class="step">
+                <span class="step-n">03</span>
+                <span class="step-text"><strong>Ранние сигналы</strong> — выгорание, демотивация, саботаж видны до кризиса. &laquo;Татьяна не ответила 3 дня — стоит проверить&raquo;</span>
+            </div>
+            <div class="step">
+                <span class="step-n">04</span>
+                <span class="step-text"><strong>Подготовка 1-on-1</strong> — досье, история, рекомендации по коммуникации с учётом психотипа</span>
+            </div>
+        </div>
+
+        <div class="result-block r">
+            <div class="rb-text">Система эскалирует 1-on-1 чтобы удержать ключевого игрока и раскрыть его максимально. A-player без признания 3+ недели — риск намеренного снижения результатов. Система видит это и предупреждает руководителя.</div>
         </div>
     </section>
 
-    <!-- ════ АРХИТЕКТУРА ════ -->
+    <!-- ═══ FLYWHEEL ═══ -->
     <section>
-        <p class="lbl r">Архитектура</p>
-        <h2 class="ttl r">Шесть слоёв</h2>
+        <p class="label r">Самообучение</p>
+        <h2 class="r">Каждый день умнее<br>вчерашнего.</h2>
+        <p class="lead r" style="margin-top:16px">CEO поправил — система запомнила навсегда. Не &laquo;планируй лучше&raquo;, а &laquo;встречи с Татьяной всегда идут 20+ мин — закладывай буфер&raquo;. Конкретные паттерны, а не абстрактные советы.</p>
 
-        <div class="stack r">
-            <div class="sr"><span class="sr-n">06</span><span class="sr-name">Управление</span><span class="sr-brief">FinOps, метрики, ROI на процесс</span></div>
-            <div class="sr"><span class="sr-n">05</span><span class="sr-name">Люди</span><span class="sr-brief">AI Champions, новые роли, adoption</span></div>
-            <div class="sr"><span class="sr-n">04</span><span class="sr-name">Скиллы</span><span class="sr-brief">shared, versioned, forkable. 3 уровня evals</span></div>
-            <div class="sr"><span class="sr-n">03</span><span class="sr-name">Оркестрация</span><span class="sr-brief">ролевые агенты, пайплайны, координация</span></div>
-            <div class="sr"><span class="sr-n">02</span><span class="sr-name">Память</span><span class="sr-brief">семантическая · эпизодическая · процедурная</span></div>
-            <div class="sr"><span class="sr-n">01</span><span class="sr-name">Инфраструктура</span><span class="sr-brief">guardrails, DLP, аудит, песочница</span></div>
+        <div class="fw-steps r">
+            <div class="fw-s"><span class="fw-n">1</span> Агенты выполняют задачи</div>
+            <div class="fw-s"><span class="fw-n">2</span> Каждое действие — размеченные данные</div>
+            <div class="fw-s"><span class="fw-n">3</span> Данные улучшают модели и процессы</div>
+            <div class="fw-s"><span class="fw-n">4</span> CEO поправил — запомнила навсегда</div>
+            <div class="fw-s"><span class="fw-n">&circlearrowright;</span> Каждый день точнее. Ошибки не повторяются.</div>
         </div>
 
-        <p class="lbl r" style="margin-top:clamp(28px,3vh,40px)">Интеграции</p>
-        <div class="tags r">
-            <span class="tag on">Obsidian</span>
-            <span class="tag on">Git</span>
-            <span class="tag on">Telegram</span>
-            <span class="tag on">Google Calendar</span>
-            <span class="tag on">Whisper</span>
-            <span class="tag on">MCP Protocol</span>
-            <span class="tag on">Claude / Gemini / ChatGPT</span>
-            <span class="tag">CRM</span>
-            <span class="tag">SQL</span>
-            <span class="tag">n8n</span>
-            <span class="tag">Playwright</span>
-            <span class="tag">QMD</span>
+        <div class="result-block r">
+            <div class="rb-text">Episodic memory, context memory, процедурная память — всё законнекчено через Obsidian. Агент модифицирует свои промпты, память, инструменты — и то, как он оценивает собственный результат. Система учится учиться.</div>
         </div>
     </section>
 
-    <!-- ════ ДОПОЛНИТЕЛЬНЫЕ МОДУЛИ ════ -->
-    <section>
-        <p class="lbl r">Ещё внутри</p>
-        <div class="modules r">
-            <div class="mod-card">
-                <div class="mod-card-title">🔍 Deep Research</div>
-                <div class="mod-card-desc">Claude + Gemini + ChatGPT параллельно. Синтез: где сходятся, где расходятся. Ответ за минуты.</div>
-            </div>
-            <div class="mod-card">
-                <div class="mod-card-title">🔎 Semantic Search</div>
-                <div class="mod-card-desc">Поиск по всему vault по смыслу. Находит то, что вы забыли что записывали.</div>
-            </div>
-            <div class="mod-card">
-                <div class="mod-card-title">📞 Call Prep & Debrief</div>
-                <div class="mod-card-desc">До встречи — досье и вопросы. После — решения в лог, задачи в трекер, сигналы по людям.</div>
-            </div>
-            <div class="mod-card">
-                <div class="mod-card-title">👤 People & Relationships</div>
-                <div class="mod-card-desc">Досье: психометрика, тональные сдвиги, история. Знает команду лучше, чем HR.</div>
-            </div>
-            <div class="mod-card">
-                <div class="mod-card-title">📄 OK Draft</div>
-                <div class="mod-card-desc">Регламенты, предложения, записки — не пустые бланки, а документы с данными из vault.</div>
-            </div>
-            <div class="mod-card">
-                <div class="mod-card-title">🛡 Guardrails</div>
-                <div class="mod-card-desc">Контроль доступа, DLP, аудит. Агенты в песочнице. Конфиденциальность встроена.</div>
-            </div>
-        </div>
-    </section>
+    <!-- ═══ CLOSING ═══ -->
+    <section class="closing">
+        <h2 class="r">Не оптимизация<br>процессов.<br>Новая операционная<br>система.</h2>
+        <p class="lead r">Компании с AI-мозгом обойдут остальных в&nbsp;10&times;. Эта система уже работает.</p>
 
-    <!-- ════ VISION ════ -->
-    <section>
-        <p class="lbl r">Vision</p>
-        <h2 class="ttl r">Куда</h2>
-        <div class="vis">
-            <div class="r">
-                <p class="vis-label">Сегодня</p>
-                <p class="vis-text">Голос → исполнение. CEO 30 минут в день. AI видит, помнит и решает быстрее любого сотрудника.</p>
+        <div class="vis-rows r">
+            <div class="vis-r">
+                <span class="vis-l">Сегодня</span>
+                <span class="vis-t">Голос &rarr; исполнение. CEO 30 мин/день. Система видит, помнит, решает.</span>
             </div>
-            <div class="r">
-                <p class="vis-label">Завтра</p>
-                <p class="vis-text">Self-improving agents. Система меняет свои промпты, память и инструменты. И меняет то, как она оценивает результат.</p>
+            <div class="vis-r">
+                <span class="vis-l">Завтра</span>
+                <span class="vis-t">Self-improving agents. Система меняет промпты, память и как оценивает результат.</span>
             </div>
-            <div class="r">
-                <p class="vis-label">Горизонт</p>
-                <p class="vis-text">Компания как RL-машина. Обучается с подкреплением от каждого действия. CEO — архитектор системы, не её оператор.</p>
+            <div class="vis-r">
+                <span class="vis-l">Горизонт</span>
+                <span class="vis-t">Компания как RL-машина. CEO — архитектор системы, не её оператор.</span>
             </div>
-            <p class="vis-coda r">Не оптимизация процессов. Новая операционная модель.</p>
         </div>
     </section>
 
@@ -406,7 +449,7 @@
 (function(){
     var io=new IntersectionObserver(function(ee){
         ee.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}})
-    },{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+    },{threshold:.08,rootMargin:'0px 0px -30px 0px'});
     document.querySelectorAll('.r').forEach(function(el){io.observe(el)})
 })();
 </script>
