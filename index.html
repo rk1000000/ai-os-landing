@@ -3,108 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI OS — операционная система для компании</title>
+    <title>AI OS — операционный мозг компании</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         :root{
             --fd:'Archivo',system-ui,sans-serif;--fb:'Spectral',Georgia,serif;
-            --bg:oklch(0.985 0.004 50);--sf:oklch(0.965 0.006 50);--bd:oklch(0.895 0.006 50);
-            --tx:oklch(0.18 0.012 50);--m1:oklch(0.40 0.008 50);--m2:oklch(0.56 0.006 50);
-            --hi:oklch(0.94 0.018 255);--hib:oklch(0.84 0.035 255);
-            --mw:1080px
+            --bg:oklch(0.985 0.004 50);--sf:oklch(0.96 0.006 50);--bd:oklch(0.89 0.006 50);
+            --tx:oklch(0.15 0.012 50);--m1:oklch(0.38 0.008 50);--m2:oklch(0.52 0.006 50);
+            --hi:oklch(0.93 0.02 255);--hib:oklch(0.82 0.04 255);
+            --acc:oklch(0.35 0.1 255);
+            --mw:1100px
         }
-        html{font-size:16px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-        body{font-family:var(--fb);line-height:1.65;color:var(--tx);background:var(--bg)}
-        .c{max-width:var(--mw);margin:0 auto;padding:0 clamp(24px,5vw,48px)}
-        section{padding:clamp(48px,7vh,88px) 0}
-        .lbl{font-family:var(--fd);font-weight:300;font-size:.6875rem;text-transform:uppercase;letter-spacing:.12em;color:var(--m2);margin-bottom:18px}
-        .ttl{font-family:var(--fd);font-weight:600;font-size:clamp(1.75rem,3.5vw,2.5rem);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
-        .lead{font-size:1.0625rem;line-height:1.7;color:var(--m1);max-width:520px;margin-bottom:clamp(28px,3.5vh,48px)}
+        html{font-size:17px;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+        body{font-family:var(--fb);line-height:1.6;color:var(--tx);background:var(--bg)}
+        .c{max-width:var(--mw);margin:0 auto;padding:0 clamp(24px,5vw,56px)}
+        section{padding:clamp(56px,8vh,100px) 0}
 
-        /* Hero */
-        .hero{padding:clamp(64px,11vh,120px) 0 clamp(40px,6vh,72px);max-width:720px}
-        .hero h1{font-family:var(--fd);font-weight:700;font-size:clamp(2.5rem,7vw,4.5rem);line-height:1.06;letter-spacing:-.035em;margin-bottom:20px}
-        .hero .sub{font-family:var(--fd);font-weight:400;font-size:clamp(1.0625rem,1.8vw,1.375rem);line-height:1.4;color:var(--m1);max-width:540px}
+        /* ── Typography ── */
+        .lbl{font-family:var(--fd);font-weight:400;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc);margin-bottom:14px}
+        .ttl{font-family:var(--fd);font-weight:700;font-size:clamp(1.875rem,4vw,2.75rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:12px}
+        .sub{font-family:var(--fd);font-weight:400;font-size:clamp(1.0625rem,1.5vw,1.25rem);line-height:1.5;color:var(--m1);max-width:560px}
 
-        /* Superpower block */
-        .sp{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:620px;margin:24px 0 0}
-        .sp-item{padding:16px 20px;background:var(--sf);font-family:var(--fd)}
-        .sp-num{font-size:1.375rem;font-weight:700;letter-spacing:-.02em;margin-bottom:2px}
-        .sp-label{font-size:.75rem;font-weight:400;color:var(--m1);line-height:1.4}
-        @media(max-width:480px){.sp{grid-template-columns:1fr}}
+        /* ── Hero ── */
+        .hero{padding:clamp(72px,12vh,140px) 0 clamp(48px,6vh,80px);max-width:760px}
+        .hero h1{font-family:var(--fd);font-weight:800;font-size:clamp(2.75rem,7.5vw,5rem);line-height:1.04;letter-spacing:-.04em;margin-bottom:24px}
+        .hero .sub{margin-bottom:32px;max-width:580px}
+        .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+        .stat{padding:20px;background:var(--sf)}
+        .stat-num{font-family:var(--fd);font-weight:800;font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
+        .stat-label{font-family:var(--fd);font-size:.75rem;font-weight:400;color:var(--m1);line-height:1.35}
+        @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
 
-        /* Stack */
-        .stack{display:flex;flex-direction:column;gap:3px;max-width:580px}
-        .sr{display:flex;align-items:baseline;gap:16px;padding:13px 20px;background:var(--sf);font-family:var(--fd);font-size:.875rem}
+        /* ── Pipeline (How it works) ── */
+        .pipe{display:flex;align-items:stretch;gap:4px;margin:24px 0}
+        .pipe-step{flex:1;padding:20px 16px;background:var(--sf);text-align:center;position:relative}
+        .pipe-step:last-child{background:var(--hi);border:1px solid var(--hib)}
+        .pipe-num{font-family:var(--fd);font-weight:300;font-size:.6875rem;color:var(--m2);margin-bottom:6px}
+        .pipe-icon{font-size:1.75rem;margin-bottom:8px;line-height:1}
+        .pipe-text{font-family:var(--fd);font-weight:600;font-size:.8125rem;line-height:1.35}
+        .pipe-sub{font-family:var(--fd);font-weight:400;font-size:.6875rem;color:var(--m1);margin-top:4px;line-height:1.3}
+        .pipe-arrow{display:flex;align-items:center;color:var(--m2);font-family:var(--fd);font-size:.875rem;flex-shrink:0}
+        @media(max-width:700px){.pipe{flex-wrap:wrap}.pipe-step{flex:1 0 45%}.pipe-arrow{display:none}}
+
+        /* ── Result cards ── */
+        .results{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+        .result{padding:28px 24px;background:var(--sf)}
+        .result-icon{font-size:1.5rem;margin-bottom:10px}
+        .result-title{font-family:var(--fd);font-weight:700;font-size:1.0625rem;line-height:1.2;margin-bottom:8px;letter-spacing:-.01em}
+        .result-text{font-size:.9375rem;line-height:1.6;color:var(--m1)}
+        .result-text strong{color:var(--tx);font-weight:500}
+        .result.wide{grid-column:1/-1}
+        @media(max-width:600px){.results{grid-template-columns:1fr}}
+
+        /* ── Compact modules ── */
+        .modules{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+        .mod-card{padding:20px;background:var(--sf)}
+        .mod-card-title{font-family:var(--fd);font-weight:600;font-size:.9375rem;margin-bottom:4px}
+        .mod-card-desc{font-size:.8125rem;line-height:1.5;color:var(--m1)}
+        @media(max-width:600px){.modules{grid-template-columns:1fr}}
+
+        /* ── Flow diagram ── */
+        .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:16px 0}
+        .fn{font-family:var(--fd);font-size:.8125rem;font-weight:500;padding:8px 14px;background:var(--sf);border:1px solid var(--bd)}
+        .fn.hi{background:var(--hi);border-color:var(--hib)}
+        .fn.ghost{border-style:dashed;color:var(--m2)}
+        .fa{font-family:var(--fd);font-size:.8125rem;color:var(--m2)}
+
+        /* ── Stack ── */
+        .stack{display:flex;flex-direction:column;gap:3px;max-width:600px}
+        .sr{display:flex;align-items:baseline;gap:16px;padding:14px 20px;background:var(--sf);font-family:var(--fd);font-size:.9375rem}
         .sr-n{font-weight:300;color:var(--m2);min-width:22px}
-        .sr-name{font-weight:600;min-width:140px}
+        .sr-name{font-weight:600;min-width:150px}
         .sr-brief{font-weight:400;color:var(--m1);font-size:.8125rem}
         @media(max-width:600px){.sr{flex-wrap:wrap;gap:4px 12px}.sr-brief{flex-basis:100%;padding-left:38px}}
 
-        /* Integrations */
-        .int-row{display:flex;flex-wrap:wrap;gap:4px;margin:20px 0}
-        .int-tag{font-family:var(--fd);font-size:.75rem;font-weight:500;padding:7px 14px;background:var(--sf);border:1px solid var(--bd)}
-        .int-tag.active{border-color:var(--hib);background:var(--hi)}
+        /* ── Tags ── */
+        .tags{display:flex;flex-wrap:wrap;gap:4px;margin:16px 0}
+        .tag{font-family:var(--fd);font-size:.75rem;font-weight:500;padding:8px 14px;background:var(--sf);border:1px solid var(--bd)}
+        .tag.on{border-color:var(--hib);background:var(--hi)}
 
-        /* Edge block — AI > human */
-        .edge{display:grid;grid-template-columns:1fr 1fr;gap:0 3px;max-width:640px;margin:0 0 24px}
-        .edge-col{display:flex;flex-direction:column;gap:3px}
-        .edge-head{font-family:var(--fd);font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;background:var(--sf);text-align:center}
-        .edge-cell{padding:12px 16px;background:var(--sf);font-family:var(--fd);font-size:.8125rem;line-height:1.5;color:var(--m1)}
-        .edge-col:last-child .edge-head{background:var(--hi)}
-        .edge-col:last-child .edge-cell{background:oklch(0.975 0.008 255)}
-        @media(max-width:540px){.edge{grid-template-columns:1fr}.edge-col:last-child{margin-top:12px}}
+        /* ── Flywheel ── */
+        .fw{display:flex;flex-direction:column;gap:3px;max-width:520px}
+        .fw-s{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--sf);font-family:var(--fd);font-size:.9375rem}
+        .fw-n{font-weight:300;color:var(--m2);min-width:20px}
+        .fw-s:last-child{background:var(--hi);border:1px solid var(--hib);font-weight:600}
 
-        /* Flow diagrams */
-        .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 24px}
-        .fn{font-family:var(--fd);font-size:.8125rem;font-weight:500;padding:7px 13px;background:var(--sf);border:1px solid var(--bd)}
-        .fn.hi{background:var(--hi);border-color:var(--hib)}
-        .fn.ghost{border-style:dashed;color:var(--m2)}
-        .fa{font-family:var(--fd);font-size:.75rem;color:var(--m2)}
-
-        /* Council */
-        .council{max-width:440px;margin:18px 0 24px}
-        .council-agents{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:4px}
-        .council-agent{text-align:center;padding:10px 6px;background:var(--sf);border:1px solid var(--bd);font-family:var(--fd);font-size:.75rem;font-weight:500}
-        .council-agent small{font-weight:300;font-size:.625rem;display:block;margin-top:1px}
-        .council-down{text-align:center;padding:5px 0;color:var(--m2);font-family:var(--fd);font-size:.6875rem}
-        .council-result{padding:10px 16px;text-align:center;background:var(--hi);border:1px solid var(--hib);font-family:var(--fd);font-size:.8125rem;font-weight:500}
-
-        /* Loop */
-        .loop{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 24px;padding:12px 16px;background:var(--sf);border:1px solid var(--bd)}
-        .loop span{font-family:var(--fd);font-size:.8125rem}
-        .loop .la{color:var(--m2);font-size:.75rem}
-
-        /* Modules */
-        .mods{display:flex;flex-direction:column}
-        .mod{padding:clamp(28px,3.5vh,44px) 0;border-top:1px solid var(--bd)}
-        .mod:last-child{border-bottom:1px solid var(--bd)}
-        .mod-head{display:flex;align-items:baseline;gap:16px;margin-bottom:6px}
-        .mod-cat{font-family:var(--fd);font-weight:500;font-size:.6875rem;text-transform:uppercase;letter-spacing:.08em;color:var(--m2);min-width:120px}
-        .mod-title{font-family:var(--fd);font-weight:600;font-size:1.0625rem;letter-spacing:-.01em}
-        .mod-body{padding-left:136px;max-width:680px}
-        .mod-body p{font-size:.9375rem;line-height:1.7;color:var(--m1);margin-bottom:5px}
-        .mod-body p:last-child{margin-bottom:0}
-        .mod-body strong{color:var(--tx);font-weight:500}
-        @media(max-width:720px){.mod-head{flex-direction:column;gap:3px}.mod-body{padding-left:0}}
-
-        /* Flywheel */
-        .flywheel{display:flex;flex-direction:column;gap:3px;max-width:520px;margin:18px 0 24px}
-        .fw-step{display:flex;align-items:center;gap:12px;padding:11px 16px;background:var(--sf);font-family:var(--fd);font-size:.8125rem}
-        .fw-num{font-weight:300;color:var(--m2);min-width:18px}
-        .fw-step:last-child{background:var(--hi);border:1px solid var(--hib)}
-
-        /* Vision */
+        /* ── Vision ── */
         .vis{max-width:560px;display:flex;flex-direction:column;gap:28px}
-        .vis-label{font-family:var(--fd);font-weight:600;font-size:1rem;margin-bottom:4px}
-        .vis-text{font-size:1rem;line-height:1.7;color:var(--m1);max-width:460px}
-        .vis-coda{font-style:italic;font-size:clamp(1.0625rem,1.5vw,1.3125rem);line-height:1.5;margin-top:8px;max-width:420px}
+        .vis-label{font-family:var(--fd);font-weight:700;font-size:1.0625rem;margin-bottom:4px}
+        .vis-text{font-size:1.0625rem;line-height:1.6;color:var(--m1);max-width:460px}
+        .vis-coda{font-style:italic;font-size:clamp(1.125rem,1.5vw,1.375rem);line-height:1.45;margin-top:8px;max-width:440px}
 
-        footer{padding:56px 0 32px}
-        footer p{font-family:var(--fd);font-weight:300;font-size:.75rem;color:var(--m2);letter-spacing:.04em}
+        footer{padding:64px 0 32px}
+        footer p{font-family:var(--fd);font-weight:300;font-size:.75rem;color:var(--m2)}
 
         .r{opacity:0;transform:translateY(10px);transition:opacity .45s ease-out,transform .45s ease-out}
         .r.v{opacity:1;transform:translateY(0)}
@@ -114,311 +108,250 @@
 <body>
 <div class="c">
 
-    <!-- Hero -->
+    <!-- ════ HERO ════ -->
     <section class="hero">
-        <h1 class="r">AI уже умнее вашей команды.<br>Пора сделать его мозгом компании.</h1>
-        <p class="sub r">Он помнит каждую встречу, каждое решение, каждый разговор. Видит паттерны в тысячах взаимодействий. Работает в 100 раз быстрее. И никогда не устаёт. Чем раньше AI станет операционным мозгом — тем больше вы выиграете.</p>
-
-        <div class="sp r">
-            <div class="sp-item"><div class="sp-num">100×</div><div class="sp-label">быстрее человека на информационных задачах</div></div>
-            <div class="sp-item"><div class="sp-num">∞</div><div class="sp-label">контекст: каждый зум, каждый документ, каждое решение</div></div>
-            <div class="sp-item"><div class="sp-num">0</div><div class="sp-label">забытых решений, потерянного контекста, упущенных сигналов</div></div>
-            <div class="sp-item"><div class="sp-num">24/7</div><div class="sp-label">без настроения, усталости, политики, bias</div></div>
+        <h1 class="r">AI уже умнее вашей команды. Сделайте его мозгом компании.</h1>
+        <p class="sub r">Он помнит каждое решение, каждый разговор, каждый зум. Видит то, что люди пропускают. Работает в 100 раз быстрее. И не устаёт.</p>
+        <div class="stats r">
+            <div class="stat"><div class="stat-num">100×</div><div class="stat-label">быстрее человека</div></div>
+            <div class="stat"><div class="stat-num">∞</div><div class="stat-label">память и контекст</div></div>
+            <div class="stat"><div class="stat-num">0</div><div class="stat-label">потерянных решений</div></div>
+            <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">без усталости и bias</div></div>
         </div>
     </section>
 
-    <!-- Почему AI, а не человек -->
+    <!-- ════ КАК ЭТО РАБОТАЕТ ════ -->
     <section>
-        <p class="lbl r">Преимущество</p>
-        <h2 class="ttl r">Видит больше. Помнит всё. Решает быстрее.</h2>
+        <p class="lbl r">Как это работает</p>
+        <h2 class="ttl r">Надиктовал — полетело</h2>
+        <p class="sub r" style="margin-bottom:24px">CEO говорит голосом. Система расщепляет на задачи, раздаёт агентам, исполняет. Утром — результат.</p>
 
-        <div class="edge r">
-            <div class="edge-col">
-                <div class="edge-head">Человек</div>
-                <div class="edge-cell">Помнит последние 3 встречи</div>
-                <div class="edge-cell">Читает 10% документов</div>
-                <div class="edge-cell">Видит свой отдел</div>
-                <div class="edge-cell">Забывает решения через неделю</div>
-                <div class="edge-cell">Фильтрует через настроение</div>
+        <div class="pipe r">
+            <div class="pipe-step">
+                <div class="pipe-icon">🎤</div>
+                <div class="pipe-text">Голос / Зум</div>
+                <div class="pipe-sub">Рефлексия, встреча, звонок</div>
             </div>
-            <div class="edge-col">
-                <div class="edge-head">Система</div>
-                <div class="edge-cell">Помнит каждую встречу, каждое решение</div>
-                <div class="edge-cell">Читает всё. Ищет по смыслу, не по словам</div>
-                <div class="edge-cell">Видит связи между всеми отделами</div>
-                <div class="edge-cell">Проверяет противоречия с прошлыми решениями</div>
-                <div class="edge-cell">Анализирует данные. Без bias, без усталости</div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">
+                <div class="pipe-icon">🧠</div>
+                <div class="pipe-text">AI расщепляет</div>
+                <div class="pipe-sub">Задачи, решения, контекст</div>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">
+                <div class="pipe-icon">⚡</div>
+                <div class="pipe-text">Агенты делают</div>
+                <div class="pipe-sub">Параллельно, автономно</div>
+            </div>
+            <div class="pipe-arrow">→</div>
+            <div class="pipe-step">
+                <div class="pipe-icon">✓</div>
+                <div class="pipe-text">CEO: да / нет</div>
+                <div class="pipe-sub">Проблема → варианты → рекомендация</div>
             </div>
         </div>
 
-        <p class="lead r" style="margin-top:24px">
-            Context Engineering > Prompt Engineering. Важно не что вы говорите модели — а что модель <em>видит</em> при принятии решения. Prompt — одна инструкция. Context — данные, память, весь контекст компании.
-        </p>
+        <p class="sub r" style="margin-top:20px">Всё фиксируется: кто-то на зуме сказал «задачу закрыл» — система записала. Нет артефакта — бот в Telegram пингует ответственного. Задачи не теряются.</p>
     </section>
 
-    <!-- Уже работает -->
+    <!-- ════ РЕЗУЛЬТАТЫ ════ -->
     <section>
         <p class="lbl r">Результаты</p>
-        <h2 class="ttl r">Уже меняет результаты</h2>
-        <p class="lead r">Каждый зум записан. Каждая голосовая заметка расшифрована. Каждое решение в памяти. Имея полный контекст — система уже влияет на деньги.</p>
+        <h2 class="ttl r">Уже влияет на деньги</h2>
+        <p class="sub r" style="margin-bottom:24px">Не теория. Система имеет весь контекст компании и уже меняет результаты в каждом отделе.</p>
 
-        <div class="mods">
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Решения</span><span class="mod-title">Ошибки не повторяются. Решения точнее.</span></div>
-                <div class="mod-body">
-                    <p>Система помнит каждое решение, которое когда-либо принималось. Перед новым — автоматически проверяет: нет ли противоречия с прошлыми? Не обсуждали ли это уже? Какой был результат?</p>
-                    <p>Руководитель забывает. Система — нет. Меньше «хождения по кругу», точнее тактика, быстрее исполнение.</p>
-                </div>
+        <div class="results r">
+
+            <div class="result">
+                <div class="result-icon">🎯</div>
+                <div class="result-title">Решения точнее. Ошибки не повторяются.</div>
+                <div class="result-text">AI помнит каждое решение за всю историю. Перед новым — проверяет: нет ли противоречий? Уже обсуждали? Какой был результат? <strong>Меньше «хождения по кругу», быстрее исполнение.</strong></div>
             </div>
 
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Люди</span><span class="mod-title">Проблемы видны до того, как станут кризисом</span></div>
-                <div class="mod-body">
-                    <p>Каждая встреча анализируется: не только что решили, но и как изменился тон, мотивация, вовлечённость. Кто выгорает, кто растёт, кто саботирует — система видит раньше руководителя.</p>
-                    <p>Руководитель видит одного человека за раз. Система видит динамику всей команды — и подсказывает до того, как вы потеряете ключевого сотрудника.</p>
-                </div>
+            <div class="result">
+                <div class="result-icon">📡</div>
+                <div class="result-title">Реклама на автопилоте. Стоимость клиента падает.</div>
+                <div class="result-text">Анализ результатов каждую неделю: какие заголовки работают, какие нет. <strong>Самообучающаяся система</strong> — предлагает новые объявления на основе данных. Дашборд с метриками в реальном времени.</div>
             </div>
 
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Реклама</span><span class="mod-title">Стоимость клиента падает. Качество лидов растёт.</span></div>
-                <div class="mod-body">
-                    <p>Маркетолог видит CTR. Система видит всю воронку — от клика до удержания. Знает: какие клиенты приходят, какие остаются, какие жалуются, какой LTV.</p>
-                    <p>Имея этот контекст — корректирует ставки, тексты, аудитории. Оптимизирует не по кликам, а по прибыли.</p>
-                </div>
+            <div class="result">
+                <div class="result-icon">💬</div>
+                <div class="result-title">Конверсия растёт. Суфлёр подсказывает в моменте.</div>
+                <div class="result-text">Во время звонка AI подсказывает менеджеру <strong>одну вещь: что сказать прямо сейчас</strong>. Как отработать возражение, когда закрывать. Загружена вся история успешных продаж.</div>
             </div>
 
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Продажи</span><span class="mod-title">Конверсия растёт. Суфлёр подсказывает в моменте.</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn hi">Суфлёр</span><span class="fa">→</span>
-                        <span class="fn">что сказать</span><span class="fa">→</span>
-                        <span class="fn">как отработать возражение</span><span class="fa">→</span>
-                        <span class="fn">когда закрывать</span>
-                    </div>
-                    <p>AI-суфлёр во время звонка подсказывает менеджеру: что сказать прямо сейчас, как отработать конкретное возражение, когда переходить к закрытию. В него загружена вся история продаж, все успешные скрипты, все паттерны отказов.</p>
-                    <p>До звонка — досье на клиента. После — автоматический разбор и follow-up. Менеджер забывает перезвонить. Система — никогда.</p>
-                </div>
+            <div class="result">
+                <div class="result-icon">⚖️</div>
+                <div class="result-title">Юристы побеждают чаще.</div>
+                <div class="result-text">Вся практика, все прецеденты, все аргументы судов — в памяти. <strong>Суфлёр для юриста:</strong> какую стратегию выбрать, что сработало раньше, где риск. Каждое дело сильнее предыдущего.</div>
             </div>
 
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Юристы</span><span class="mod-title">Больше выигранных дел. Юристы сильнее.</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn">Вся практика</span><span class="fa">→</span>
-                        <span class="fn">все прецеденты</span><span class="fa">→</span>
-                        <span class="fn hi">суфлёр для юриста</span><span class="fa">→</span>
-                        <span class="fn">стратегия по делу</span>
-                    </div>
-                    <p>В систему загружена вся практика: каждое дело, каждый кейс, каждый прецедент, каждый аргумент суда. Юрист получает суфлёра: какую стратегию выбрать, какие аргументы сработали раньше, где риски.</p>
-                    <p>Каждое следующее дело — сильнее предыдущего. Система учится на всей практике, не на памяти одного человека. Юристы побеждают чаще.</p>
-                </div>
+            <div class="result">
+                <div class="result-icon">👥</div>
+                <div class="result-title">Проблемы с людьми видны до кризиса.</div>
+                <div class="result-text">Каждый зум анализируется: не только решения, но и <strong>тон, мотивация, вовлечённость</strong>. Кто выгорает, кто растёт, кто саботирует. Вы видите динамику всей команды, а не одного человека.</div>
+            </div>
+
+            <div class="result">
+                <div class="result-icon">🤖</div>
+                <div class="result-title">Задачи не теряются. Бот работает в чатах.</div>
+                <div class="result-text">AI-бот в Telegram команды: пингует по задачам, напоминает дедлайны, <strong>сотрудники сами берут задачи</strong> прямо в чате. Матрица эскалации: 1 день → напоминание, 3 дня → руководитель, 5 дней → CEO.</div>
             </div>
         </div>
     </section>
 
-    <!-- Архитектура -->
+    <!-- ════ ПОСТМИТ — РЕКОМЕНДАТЕЛЬНАЯ СИСТЕМА ════ -->
+    <section>
+        <p class="lbl r">Каждая встреча</p>
+        <h2 class="ttl r">Не просто запись. Рекомендательная система.</h2>
+        <p class="sub r" style="margin-bottom:24px">После каждого зума AI не просто пишет саммари. Он загружает весь контекст компании и даёт рекомендации.</p>
+
+        <div class="flow r">
+            <span class="fn">Зум-запись</span><span class="fa">→</span>
+            <span class="fn">Транскрипция</span><span class="fa">→</span>
+            <span class="fn hi">+ 60K токенов контекста</span><span class="fa">→</span>
+            <span class="fn hi">Рекомендации</span>
+        </div>
+
+        <div class="results r" style="margin-top:16px">
+            <div class="result">
+                <div class="result-title">3 слоя контекста</div>
+                <div class="result-text"><strong>Индекс</strong> — полная карта компании (кто, что, зачем). <strong>Глубокий</strong> — тактика именно по теме встречи. <strong>Операционный</strong> — текущий таск-борд для проверки решений.</div>
+            </div>
+            <div class="result">
+                <div class="result-title">Что даёт на выходе</div>
+                <div class="result-text"><strong>Что вы сделали правильно.</strong> Риски и ошибки. Слепые зоны. Противоречия с прошлыми решениями. Конкретные рекомендации со ссылками на данные.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ CEO РЕЖИМ ════ -->
+    <section>
+        <p class="lbl r">Для CEO</p>
+        <h2 class="ttl r">30 минут в день. Всё под контролем.</h2>
+
+        <div class="modules r">
+            <div class="mod-card">
+                <div class="mod-card-title">🌅 Утренний дайджест</div>
+                <div class="mod-card-desc">Что за 24 часа, что на сегодня, что просрочено. Привязан к стратегическим приоритетам. В Telegram, за 2 минуты.</div>
+            </div>
+            <div class="mod-card">
+                <div class="mod-card-title">🎯 Фокус дня</div>
+                <div class="mod-card-desc">Не абстрактные цели — конкретные действия на сегодня. Что двигает стратегию вперёд.</div>
+            </div>
+            <div class="mod-card">
+                <div class="mod-card-title">📋 ЗРС — быстрые решения</div>
+                <div class="mod-card-desc">Проблема → 2-3 варианта → рекомендация. CEO отвечает да/нет. Работа не останавливается.</div>
+            </div>
+            <div class="mod-card">
+                <div class="mod-card-title">🌙 Итоги дня</div>
+                <div class="mod-card-desc">План vs факт. Что сделано, что нет, почему. Автоматическое извлечение паттернов.</div>
+            </div>
+            <div class="mod-card">
+                <div class="mod-card-title">📊 Недельный обзор</div>
+                <div class="mod-card-desc">Прогресс по каждому приоритету. Рекомендации: что работает, что нет, куда смотреть.</div>
+            </div>
+            <div class="mod-card">
+                <div class="mod-card-title">🏛 Совет директоров</div>
+                <div class="mod-card-desc">CFO, COO, стратег, адвокат дьявола — 4 агента спорят. Для крупных решений без слепых зон.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════ САМООБУЧЕНИЕ ════ -->
+    <section>
+        <p class="lbl r">Механика</p>
+        <h2 class="ttl r">Каждый день умнее, чем вчера</h2>
+        <p class="sub r" style="margin-bottom:24px">Система не просто работает — она учится. И учится учиться.</p>
+
+        <div class="fw r">
+            <div class="fw-s"><span class="fw-n">1</span>Агенты выполняют задачи</div>
+            <div class="fw-s"><span class="fw-n">2</span>Каждое действие → размеченные данные</div>
+            <div class="fw-s"><span class="fw-n">3</span>Данные → лучшие модели и процессы</div>
+            <div class="fw-s"><span class="fw-n">4</span>CEO поправил → система запомнила навсегда</div>
+            <div class="fw-s"><span class="fw-n">↻</span>Каждый день точнее. Ошибки не повторяются.</div>
+        </div>
+    </section>
+
+    <!-- ════ АРХИТЕКТУРА ════ -->
     <section>
         <p class="lbl r">Архитектура</p>
         <h2 class="ttl r">Шесть слоёв</h2>
 
         <div class="stack r">
-            <div class="sr"><span class="sr-n">06</span><span class="sr-name">Управление</span><span class="sr-brief">FinOps, метрики, process ownership, ROI на процесс</span></div>
-            <div class="sr"><span class="sr-n">05</span><span class="sr-name">Люди</span><span class="sr-brief">AI Champions, новые роли, adoption, саботаж-менеджмент</span></div>
-            <div class="sr"><span class="sr-n">04</span><span class="sr-name">Скиллы</span><span class="sr-brief">shared, versioned, forkable. Evals: unit → integration → business</span></div>
-            <div class="sr"><span class="sr-n">03</span><span class="sr-name">Оркестрация</span><span class="sr-brief">ролевые агенты, пайплайны, генератор/дискриминатор</span></div>
-            <div class="sr"><span class="sr-n">02</span><span class="sr-name">Данные и память</span><span class="sr-brief">семантическая · эпизодическая · процедурная</span></div>
-            <div class="sr"><span class="sr-n">01</span><span class="sr-name">Инфраструктура</span><span class="sr-brief">guardrails, DLP, policy engine, audit, session traces</span></div>
+            <div class="sr"><span class="sr-n">06</span><span class="sr-name">Управление</span><span class="sr-brief">FinOps, метрики, ROI на процесс</span></div>
+            <div class="sr"><span class="sr-n">05</span><span class="sr-name">Люди</span><span class="sr-brief">AI Champions, новые роли, adoption</span></div>
+            <div class="sr"><span class="sr-n">04</span><span class="sr-name">Скиллы</span><span class="sr-brief">shared, versioned, forkable. 3 уровня evals</span></div>
+            <div class="sr"><span class="sr-n">03</span><span class="sr-name">Оркестрация</span><span class="sr-brief">ролевые агенты, пайплайны, координация</span></div>
+            <div class="sr"><span class="sr-n">02</span><span class="sr-name">Память</span><span class="sr-brief">семантическая · эпизодическая · процедурная</span></div>
+            <div class="sr"><span class="sr-n">01</span><span class="sr-name">Инфраструктура</span><span class="sr-brief">guardrails, DLP, аудит, песочница</span></div>
         </div>
 
-        <p class="lbl r" style="margin-top:clamp(32px,4vh,48px)">Данные и память</p>
-        <div class="edge r" style="max-width:680px">
-            <div class="edge-col">
-                <div class="edge-head">Тип памяти</div>
-                <div class="edge-cell"><strong style="color:var(--tx)">Семантическая</strong> — факты и связи. «Клиент X на тарифе Y»</div>
-                <div class="edge-cell"><strong style="color:var(--tx)">Эпизодическая</strong> — события. «2 марта клиент эскалировал тикет»</div>
-                <div class="edge-cell"><strong style="color:var(--tx)">Процедурная</strong> — навыки. Как подать квартальный отчёт, скрипты проверки</div>
-            </div>
-            <div class="edge-col">
-                <div class="edge-head">Хранилище</div>
-                <div class="edge-cell">Obsidian / Markdown + Git — единый источник истины</div>
-                <div class="edge-cell">SQL к существующим БД — агент пишет запросы</div>
-                <div class="edge-cell">MCP-коннекторы к SaaS: CRM, мессенджеры, календарь</div>
-            </div>
-        </div>
-
-        <p class="lbl r" style="margin-top:clamp(32px,4vh,48px)">Интеграции</p>
-        <div class="int-row r">
-            <span class="int-tag active">Obsidian / Markdown</span>
-            <span class="int-tag active">Git</span>
-            <span class="int-tag active">Telegram</span>
-            <span class="int-tag active">Google Calendar</span>
-            <span class="int-tag active">Whisper</span>
-            <span class="int-tag">CRM (Bitrix / amoCRM)</span>
-            <span class="int-tag active">MCP Protocol</span>
-            <span class="int-tag">SQL / ClickHouse</span>
-            <span class="int-tag active">Claude / Gemini / ChatGPT</span>
-            <span class="int-tag">n8n</span>
-            <span class="int-tag">Playwright</span>
-            <span class="int-tag">QMD</span>
+        <p class="lbl r" style="margin-top:clamp(28px,3vh,40px)">Интеграции</p>
+        <div class="tags r">
+            <span class="tag on">Obsidian</span>
+            <span class="tag on">Git</span>
+            <span class="tag on">Telegram</span>
+            <span class="tag on">Google Calendar</span>
+            <span class="tag on">Whisper</span>
+            <span class="tag on">MCP Protocol</span>
+            <span class="tag on">Claude / Gemini / ChatGPT</span>
+            <span class="tag">CRM</span>
+            <span class="tag">SQL</span>
+            <span class="tag">n8n</span>
+            <span class="tag">Playwright</span>
+            <span class="tag">QMD</span>
         </div>
     </section>
 
-    <!-- Модули -->
+    <!-- ════ ДОПОЛНИТЕЛЬНЫЕ МОДУЛИ ════ -->
     <section>
-        <p class="lbl r">Модули</p>
-        <h2 class="ttl r">Что внутри</h2>
-        <p class="lead r">Каждый модуль — скилл с входом, процессом и результатом.</p>
-
-        <div class="mods">
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Ритм дня</span><span class="mod-title">Ни один день не теряется. Каждый — точнее предыдущего.</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn">Brief</span><span class="fa">→</span>
-                        <span class="fn">Focus</span><span class="fa">→</span>
-                        <span class="fn ghost">день</span><span class="fa">→</span>
-                        <span class="fn">EOD</span><span class="fa">→</span>
-                        <span class="fn hi">Learnings</span><span class="fa">→</span>
-                        <span class="fn">Weekly Review</span>
-                    </div>
-                    <p><strong>Brief</strong> — утром: что за 24ч, что на сегодня, что просрочено. Привязан к стратегическим приоритетам.</p>
-                    <p><strong>Focus</strong> — план дня. Не цели — действия.</p>
-                    <p><strong>EOD</strong> — вечером: план vs факт. Автоматическое извлечение паттернов из дня.</p>
-                    <p><strong>Review</strong> — раз в неделю/месяц: прогресс по приоритетам + рекомендации модели.</p>
-                </div>
+        <p class="lbl r">Ещё внутри</p>
+        <div class="modules r">
+            <div class="mod-card">
+                <div class="mod-card-title">🔍 Deep Research</div>
+                <div class="mod-card-desc">Claude + Gemini + ChatGPT параллельно. Синтез: где сходятся, где расходятся. Ответ за минуты.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Мониторинг</span><span class="mod-title">Ничего не проваливается. Дедлайны не горят.</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn">Telegram</span><span class="fn">Задачи</span><span class="fn">Дедлайны</span>
-                        <span class="fa">→ каждые 2ч →</span>
-                        <span class="fn hi">Эскалация</span>
-                    </div>
-                    <p>Фоновая проверка. Матрица: 1 день → напоминание. 3 дня → руководитель. 5 дней → CEO.</p>
-                </div>
+            <div class="mod-card">
+                <div class="mod-card-title">🔎 Semantic Search</div>
+                <div class="mod-card-desc">Поиск по всему vault по смыслу. Находит то, что вы забыли что записывали.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Самообучение</span><span class="mod-title">Каждый день система умнее, чем вчера</span></div>
-                <div class="mod-body">
-                    <div class="loop">
-                        <span>Действие</span><span class="la">→</span>
-                        <span>Результат</span><span class="la">→</span>
-                        <span>Паттерн</span><span class="la">→</span>
-                        <span>Память</span><span class="la">→</span>
-                        <span>Лучшее действие</span><span class="la">↻</span>
-                    </div>
-                    <p><strong>Learnings</strong> — compound learning. Каждый EOD извлекает: что сработало, что нет. Знания копятся, дедуплицируются.</p>
-                    <p><strong>Feedback Loop</strong> — CEO поправил → система запомнила навсегда. Ошибки не повторяются.</p>
-                    <p style="margin-top:8px;font-style:italic;color:var(--tx)">Агент не просто улучшает себя — он улучшает способ улучшения себя.</p>
-                </div>
+            <div class="mod-card">
+                <div class="mod-card-title">📞 Call Prep & Debrief</div>
+                <div class="mod-card-desc">До встречи — досье и вопросы. После — решения в лог, задачи в трекер, сигналы по людям.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">Крупные решения без слепых зон</span></div>
-                <div class="mod-body">
-                    <div class="council">
-                        <div class="council-agents">
-                            <div class="council-agent">CFO<small>финансы</small></div>
-                            <div class="council-agent">COO<small>операции</small></div>
-                            <div class="council-agent">Стратег<small>долгосрок</small></div>
-                            <div class="council-agent">Дьявол<small>риски</small></div>
-                        </div>
-                        <div class="council-down">↓ спорят независимо ↓</div>
-                        <div class="council-result">Синтез + решение с условиями</div>
-                    </div>
-                    <p>Для крупных решений. Четыре агента спорят. Каждый: за / против / с условиями. Обязательный блок «где не согласны». Адвокат дьявола не может быть мягким.</p>
-                </div>
+            <div class="mod-card">
+                <div class="mod-card-title">👤 People & Relationships</div>
+                <div class="mod-card-desc">Досье: психометрика, тональные сдвиги, история. Знает команду лучше, чем HR.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">Ответ за минуты, а не за дни</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn">Claude</span><span class="fn">Gemini</span><span class="fn">ChatGPT</span>
-                        <span class="fa">→ параллельно →</span>
-                        <span class="fn hi">Синтез</span>
-                    </div>
-                    <p>Мульти-модельный ресёрч. Где модели сходятся, где расходятся, что это значит. Если данных не хватает — честно пишет «INSUFFICIENT DATA».</p>
-                </div>
+            <div class="mod-card">
+                <div class="mod-card-title">📄 OK Draft</div>
+                <div class="mod-card-desc">Регламенты, предложения, записки — не пустые бланки, а документы с данными из vault.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Интеллект</span><span class="mod-title">Находит то, что вы забыли что знали</span></div>
-                <div class="mod-body">
-                    <p>Поиск по всему vault: документы, решения, встречи, голосовые заметки. По смыслу, не по словам. Находит то, что вы забыли что записывали.</p>
-                </div>
+            <div class="mod-card">
+                <div class="mod-card-title">🛡 Guardrails</div>
+                <div class="mod-card-desc">Контроль доступа, DLP, аудит. Агенты в песочнице. Конфиденциальность встроена.</div>
             </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Встречи</span><span class="mod-title">Каждая встреча подготовлена. Ничего не потеряно.</span></div>
-                <div class="mod-body">
-                    <div class="flow">
-                        <span class="fn hi">Prep</span><span class="fa">→</span>
-                        <span class="fn ghost">встреча</span><span class="fa">→</span>
-                        <span class="fn hi">Debrief</span><span class="fa">→</span>
-                        <span class="fn">Задачи</span><span class="fn">Решения</span><span class="fn">Сигналы</span>
-                    </div>
-                    <p><strong>Prep</strong> — досье, история решений, вопросы для discovery, красные флаги.</p>
-                    <p><strong>Debrief</strong> — решения в лог, задачи в трекер, сигналы: тон, мотивация, скрытые конфликты.</p>
-                </div>
-            </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Люди</span><span class="mod-title">Знает команду лучше, чем HR</span></div>
-                <div class="mod-body">
-                    <p>Досье: роль, психометрика, история взаимодействий, тональные сдвиги. Кто выгорает, кто растёт, кто саботирует.</p>
-                </div>
-            </div>
-
-            <div class="mod r">
-                <div class="mod-head"><span class="mod-cat">Документы</span><span class="mod-title">Документы за секунды, а не за часы</span></div>
-                <div class="mod-body">
-                    <p>Шаблоны: регламенты, предложения, записки. Не пустые бланки — документы с данными из vault.</p>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- Data Flywheel -->
-    <section>
-        <p class="lbl r">Механика</p>
-        <h2 class="ttl r">Чем дольше работает — тем сильнее результат</h2>
-        <p class="lead r">Компания буквально улучшается от использования. Каждое действие делает систему умнее.</p>
-
-        <div class="flywheel r">
-            <div class="fw-step"><span class="fw-num">1</span>Агенты выполняют задачи</div>
-            <div class="fw-step"><span class="fw-num">2</span>Каждое выполнение → размеченные данные</div>
-            <div class="fw-step"><span class="fw-num">3</span>Данные → лучшие evals, модели, топологии</div>
-            <div class="fw-step"><span class="fw-num">4</span>Лучшие процессы → лучшие результаты</div>
-            <div class="fw-step"><span class="fw-num">↻</span>Цикл повторяется. Каждый день точнее.</div>
-        </div>
-
-        <p class="lead r">Каждый процесс — продукт: владелец, бэклог, OKR по метрикам. Юнит-экономика на процесс. Люди — не исполнители, а архитекторы eval и постановщики целей.</p>
-    </section>
-
-    <!-- Vision -->
+    <!-- ════ VISION ════ -->
     <section>
         <p class="lbl r">Vision</p>
         <h2 class="ttl r">Куда</h2>
-
         <div class="vis">
             <div class="r">
                 <p class="vis-label">Сегодня</p>
-                <p class="vis-text">Голос → расшифровка → маршрутизация → исполнение. CEO 30 минут в день. Остальное — система.</p>
+                <p class="vis-text">Голос → исполнение. CEO 30 минут в день. AI видит, помнит и решает быстрее любого сотрудника.</p>
             </div>
             <div class="r">
                 <p class="vis-label">Завтра</p>
-                <p class="vis-text">Self-improving agents. Меняют свои промпты, память, инструменты. И меняют то, как они оценивают результат.</p>
+                <p class="vis-text">Self-improving agents. Система меняет свои промпты, память и инструменты. И меняет то, как она оценивает результат.</p>
             </div>
             <div class="r">
                 <p class="vis-label">Горизонт</p>
-                <p class="vis-text">Hyperagent: модифицирует свой код, свои eval-функции, свой способ хранить знания. Компания как RL-машина — обучается с подкреплением от каждого действия.</p>
+                <p class="vis-text">Компания как RL-машина. Обучается с подкреплением от каждого действия. CEO — архитектор системы, не её оператор.</p>
             </div>
             <p class="vis-coda r">Не оптимизация процессов. Новая операционная модель.</p>
         </div>
@@ -431,7 +364,7 @@
 (function(){
     var io=new IntersectionObserver(function(ee){
         ee.forEach(function(e){if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}})
-    },{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+    },{threshold:.08,rootMargin:'0px 0px -20px 0px'});
     document.querySelectorAll('.r').forEach(function(el){io.observe(el)})
 })();
 </script>
