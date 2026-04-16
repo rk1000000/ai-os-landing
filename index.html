@@ -23,7 +23,7 @@
         section{padding:clamp(56px,8vh,100px) 0}
 
         /* ── Typography ── */
-        .lbl{font-family:var(--fd);font-weight:400;font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc);margin-bottom:14px}
+        .lbl{font-family:var(--fd);font-weight:400;font-size:.8125rem;text-transform:uppercase;letter-spacing:.12em;color:var(--acc);margin-bottom:14px}
         .ttl{font-family:var(--fd);font-weight:700;font-size:clamp(1.875rem,4vw,2.75rem);line-height:1.1;letter-spacing:-.025em;margin-bottom:12px}
         .sub{font-family:var(--fd);font-weight:400;font-size:clamp(1.0625rem,1.5vw,1.25rem);line-height:1.5;color:var(--m1);max-width:560px}
 
@@ -34,17 +34,17 @@
         .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
         .stat{padding:20px;background:var(--sf)}
         .stat-num{font-family:var(--fd);font-weight:800;font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-.02em;line-height:1.1;margin-bottom:4px}
-        .stat-label{font-family:var(--fd);font-size:.75rem;font-weight:400;color:var(--m1);line-height:1.35}
+        .stat-label{font-family:var(--fd);font-size:.875rem;font-weight:400;color:var(--m1);line-height:1.35}
         @media(max-width:600px){.stats{grid-template-columns:1fr 1fr}}
 
         /* ── Pipeline (How it works) ── */
         .pipe{display:flex;align-items:stretch;gap:4px;margin:24px 0}
         .pipe-step{flex:1;padding:20px 16px;background:var(--sf);text-align:center;position:relative}
         .pipe-step:last-child{background:var(--hi);border:1px solid var(--hib)}
-        .pipe-num{font-family:var(--fd);font-weight:300;font-size:.6875rem;color:var(--m2);margin-bottom:6px}
+        .pipe-num{font-family:var(--fd);font-weight:300;font-size:.8125rem;color:var(--m2);margin-bottom:6px}
         .pipe-icon{font-size:1.75rem;margin-bottom:8px;line-height:1}
-        .pipe-text{font-family:var(--fd);font-weight:600;font-size:.8125rem;line-height:1.35}
-        .pipe-sub{font-family:var(--fd);font-weight:400;font-size:.6875rem;color:var(--m1);margin-top:4px;line-height:1.3}
+        .pipe-text{font-family:var(--fd);font-weight:600;font-size:.9375rem;line-height:1.35}
+        .pipe-sub{font-family:var(--fd);font-weight:400;font-size:.8125rem;color:var(--m1);margin-top:4px;line-height:1.3}
         .pipe-arrow{display:flex;align-items:center;color:var(--m2);font-family:var(--fd);font-size:.875rem;flex-shrink:0}
         @media(max-width:700px){.pipe{flex-wrap:wrap}.pipe-step{flex:1 0 45%}.pipe-arrow{display:none}}
 
@@ -52,8 +52,11 @@
         .results{display:grid;grid-template-columns:1fr 1fr;gap:4px}
         .result{padding:28px 24px;background:var(--sf)}
         .result-icon{font-size:1.5rem;margin-bottom:10px}
-        .result-title{font-family:var(--fd);font-weight:700;font-size:1.0625rem;line-height:1.2;margin-bottom:8px;letter-spacing:-.01em}
-        .result-text{font-size:.9375rem;line-height:1.6;color:var(--m1)}
+        .result-title{font-family:var(--fd);font-weight:700;font-size:1.125rem;line-height:1.2;margin-bottom:10px;letter-spacing:-.01em}
+        .result-text{font-size:1rem;line-height:1.55;color:var(--m1)}
+        .result-text ul{margin:0;padding-left:18px;list-style:none}
+        .result-text li{position:relative;padding-left:0;margin-bottom:3px}
+        .result-text li::before{content:"→";position:absolute;left:-18px;color:var(--acc)}
         .result-text strong{color:var(--tx);font-weight:500}
         .result.wide{grid-column:1/-1}
         @media(max-width:600px){.results{grid-template-columns:1fr}}
@@ -61,28 +64,29 @@
         /* ── Compact modules ── */
         .modules{display:grid;grid-template-columns:1fr 1fr;gap:4px}
         .mod-card{padding:20px;background:var(--sf)}
-        .mod-card-title{font-family:var(--fd);font-weight:600;font-size:.9375rem;margin-bottom:4px}
-        .mod-card-desc{font-size:.8125rem;line-height:1.5;color:var(--m1)}
+        .mod-card{padding:24px}
+        .mod-card-title{font-family:var(--fd);font-weight:600;font-size:1.0625rem;margin-bottom:6px}
+        .mod-card-desc{font-size:.9375rem;line-height:1.5;color:var(--m1)}
         @media(max-width:600px){.modules{grid-template-columns:1fr}}
 
         /* ── Flow diagram ── */
         .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:16px 0}
-        .fn{font-family:var(--fd);font-size:.8125rem;font-weight:500;padding:8px 14px;background:var(--sf);border:1px solid var(--bd)}
+        .fn{font-family:var(--fd);font-size:.9375rem;font-weight:500;padding:10px 16px;background:var(--sf);border:1px solid var(--bd)}
         .fn.hi{background:var(--hi);border-color:var(--hib)}
         .fn.ghost{border-style:dashed;color:var(--m2)}
-        .fa{font-family:var(--fd);font-size:.8125rem;color:var(--m2)}
+        .fa{font-family:var(--fd);font-size:.9375rem;color:var(--m2)}
 
         /* ── Stack ── */
         .stack{display:flex;flex-direction:column;gap:3px;max-width:600px}
         .sr{display:flex;align-items:baseline;gap:16px;padding:14px 20px;background:var(--sf);font-family:var(--fd);font-size:.9375rem}
         .sr-n{font-weight:300;color:var(--m2);min-width:22px}
         .sr-name{font-weight:600;min-width:150px}
-        .sr-brief{font-weight:400;color:var(--m1);font-size:.8125rem}
+        .sr-brief{font-weight:400;color:var(--m1);font-size:.875rem}
         @media(max-width:600px){.sr{flex-wrap:wrap;gap:4px 12px}.sr-brief{flex-basis:100%;padding-left:38px}}
 
         /* ── Tags ── */
         .tags{display:flex;flex-wrap:wrap;gap:4px;margin:16px 0}
-        .tag{font-family:var(--fd);font-size:.75rem;font-weight:500;padding:8px 14px;background:var(--sf);border:1px solid var(--bd)}
+        .tag{font-family:var(--fd);font-size:.875rem;font-weight:500;padding:10px 16px;background:var(--sf);border:1px solid var(--bd)}
         .tag.on{border-color:var(--hib);background:var(--hi)}
 
         /* ── Flywheel ── */
@@ -166,37 +170,66 @@
             <div class="result">
                 <div class="result-icon">🎯</div>
                 <div class="result-title">Решения точнее. Ошибки не повторяются.</div>
-                <div class="result-text">AI помнит каждое решение за всю историю. Перед новым — проверяет: нет ли противоречий? Уже обсуждали? Какой был результат? <strong>Меньше «хождения по кругу», быстрее исполнение.</strong></div>
+                <div class="result-text"><ul>
+                    <li>Помнит каждое решение за всю историю</li>
+                    <li>Проверяет противоречия с прошлыми решениями</li>
+                    <li>Нет «хождения по кругу» — если обсуждали, покажет когда и что решили</li>
+                </ul></div>
             </div>
 
             <div class="result">
                 <div class="result-icon">📡</div>
-                <div class="result-title">Реклама на автопилоте. Стоимость клиента падает.</div>
-                <div class="result-text">Анализ результатов каждую неделю: какие заголовки работают, какие нет. <strong>Самообучающаяся система</strong> — предлагает новые объявления на основе данных. Дашборд с метриками в реальном времени.</div>
+                <div class="result-title">Реклама на автопилоте.</div>
+                <div class="result-text"><ul>
+                    <li>Анализ каждую неделю: какие заголовки работают</li>
+                    <li>Сама предлагает новые объявления на основе данных</li>
+                    <li>Самообучающаяся: чем дольше работает, тем дешевле лид</li>
+                    <li>Дашборд с метриками в реальном времени</li>
+                </ul></div>
             </div>
 
             <div class="result">
                 <div class="result-icon">💬</div>
-                <div class="result-title">Конверсия растёт. Суфлёр подсказывает в моменте.</div>
-                <div class="result-text">Во время звонка AI подсказывает менеджеру <strong>одну вещь: что сказать прямо сейчас</strong>. Как отработать возражение, когда закрывать. Загружена вся история успешных продаж.</div>
+                <div class="result-title">Суфлёр для продаж. Конверсия растёт.</div>
+                <div class="result-text"><ul>
+                    <li>Подсказывает менеджеру <strong>одну вещь</strong> прямо во время звонка</li>
+                    <li>Как отработать конкретное возражение</li>
+                    <li>Когда закрывать сделку</li>
+                    <li>Загружена вся история успешных продаж</li>
+                </ul></div>
             </div>
 
             <div class="result">
                 <div class="result-icon">⚖️</div>
-                <div class="result-title">Юристы побеждают чаще.</div>
-                <div class="result-text">Вся практика, все прецеденты, все аргументы судов — в памяти. <strong>Суфлёр для юриста:</strong> какую стратегию выбрать, что сработало раньше, где риск. Каждое дело сильнее предыдущего.</div>
+                <div class="result-title">Суфлёр для юристов. Побеждают чаще.</div>
+                <div class="result-text"><ul>
+                    <li>Вся практика, все прецеденты, все аргументы судов — в памяти</li>
+                    <li>Какую стратегию выбрать по конкретному делу</li>
+                    <li>Что сработало в похожих кейсах раньше</li>
+                    <li>Каждое следующее дело сильнее предыдущего</li>
+                </ul></div>
             </div>
 
             <div class="result">
                 <div class="result-icon">👥</div>
                 <div class="result-title">Проблемы с людьми видны до кризиса.</div>
-                <div class="result-text">Каждый зум анализируется: не только решения, но и <strong>тон, мотивация, вовлечённость</strong>. Кто выгорает, кто растёт, кто саботирует. Вы видите динамику всей команды, а не одного человека.</div>
+                <div class="result-text"><ul>
+                    <li>Каждый зум анализируется: тон, мотивация, вовлечённость</li>
+                    <li>Видит динамику всей команды, не одного человека</li>
+                    <li>Кто выгорает, кто растёт, кто саботирует</li>
+                    <li>Предупреждает до того, как потеряете сотрудника</li>
+                </ul></div>
             </div>
 
             <div class="result">
                 <div class="result-icon">🤖</div>
-                <div class="result-title">Задачи не теряются. Бот работает в чатах.</div>
-                <div class="result-text">AI-бот в Telegram команды: пингует по задачам, напоминает дедлайны, <strong>сотрудники сами берут задачи</strong> прямо в чате. Матрица эскалации: 1 день → напоминание, 3 дня → руководитель, 5 дней → CEO.</div>
+                <div class="result-title">Бот в чатах. Задачи не теряются.</div>
+                <div class="result-text"><ul>
+                    <li>AI-бот в Telegram команды</li>
+                    <li>Пингует по задачам, напоминает дедлайны</li>
+                    <li>Сотрудники берут задачи прямо в чате</li>
+                    <li>Эскалация: 1д → напоминание, 3д → руководитель, 5д → CEO</li>
+                </ul></div>
             </div>
         </div>
     </section>
@@ -216,12 +249,21 @@
 
         <div class="results r" style="margin-top:16px">
             <div class="result">
-                <div class="result-title">3 слоя контекста</div>
-                <div class="result-text"><strong>Индекс</strong> — полная карта компании (кто, что, зачем). <strong>Глубокий</strong> — тактика именно по теме встречи. <strong>Операционный</strong> — текущий таск-борд для проверки решений.</div>
+                <div class="result-title">3 слоя контекста на каждую встречу</div>
+                <div class="result-text"><ul>
+                    <li><strong>Индекс</strong> — карта компании: кто, что, зачем</li>
+                    <li><strong>Глубокий</strong> — тактика именно по теме встречи (бенчмарки, скрипты, цифры)</li>
+                    <li><strong>Операционный</strong> — таск-борд, чтобы не дублировать решения</li>
+                </ul></div>
             </div>
             <div class="result">
-                <div class="result-title">Что даёт на выходе</div>
-                <div class="result-text"><strong>Что вы сделали правильно.</strong> Риски и ошибки. Слепые зоны. Противоречия с прошлыми решениями. Конкретные рекомендации со ссылками на данные.</div>
+                <div class="result-title">На выходе — не саммари, а рекомендации</div>
+                <div class="result-text"><ul>
+                    <li>Что вы сделали правильно</li>
+                    <li>Где риски и слепые зоны</li>
+                    <li>Противоречия с прошлыми решениями</li>
+                    <li>Конкретные рекомендации со ссылками на данные</li>
+                </ul></div>
             </div>
         </div>
     </section>
